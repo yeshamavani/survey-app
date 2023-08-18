@@ -1,0 +1,75 @@
+@import '../../../theme/styles/base/variable.scss';
+
+:host.toast-container {
+  box-shadow: none !important;
+}
+
+:host.ngx-toastr {
+  box-shadow: none !important;
+  background-color: transparent;
+}
+
+:host.toast-success {
+  background-color: transparent;
+  background-image: none;
+}
+
+:host.toast-error {
+  background-color: transparent;
+  background-image: none;
+}
+
+:host.toast-warning {
+  background-color: transparent;
+  background-image: none;
+}
+
+:host.toast-info {
+  background-color: transparent;
+  background-image: none;
+}
+
+.toastr-container {
+  min-width: 488px;
+  height: 56px;
+  padding: $normal-padding;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toastr-msg-container {
+  align-items: center;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.msg {
+  margin: 0px $margin;
+}
+
+.success-toast {
+  background-color: $alert-success-bg;
+  color: $alert-success-font;
+}
+
+.info-toast {
+  background-color: $alert-info-bg;
+  color: $alert-info-font;
+}
+
+.warning-toast {
+  background-color: $alert-warning-bg;
+  color: $alert-warning-font;
+}
+
+.error-toast {
+  background-color: $alert-error-bg;
+  color: $alert-error-font;
+}
+
+.toastr-icon {
+  font-size: $icon-size-sm;
+}

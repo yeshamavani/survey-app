@@ -1,0 +1,98 @@
+@import '../../../../theme/styles/base/variable.scss';
+
+.add-edit-question {
+  height: 100vh;
+  ::ng-deep .hdr-main {
+    padding: 12px 16px;
+    background-color: $color-white;
+    border-bottom: 1px solid $my-app-accent-100;
+    height: 48px;
+    .title-col {
+      .title {
+        color: $text-color;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
+        p {
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
+      }
+      .sub-title {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: $light-68;
+      }
+      .edit-btn {
+        color: $light-68;
+        cursor: pointer;
+      }
+    }
+    .rt-btns {
+      ::ng-deep .mat-button-base {
+        height: 32px;
+      }
+    }
+  }
+}
+.q-main-content {
+  .drop-area {
+    background-color: $color-white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    ::ng-deep.drop-area-main {
+      .card-hdr {
+        padding: 7px 16px;
+        height: 50px;
+        .card-title {
+          label {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+.question-sidenav {
+  width: 268px;
+  border: 0 none !important;
+}
+.drawer-container {
+  background-color: $drawer-bg;
+}
+.cst-menu {
+  padding: 5px 9px;
+  height: 24px;
+  &.active {
+    background-color: $purple-50;
+  }
+}
+
+.questions-card-main {
+  height: calc(100vh - 188px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  .q-grey-box {
+    padding: 16px;
+    border-radius: 4px;
+    flex: 1;
+  }
+}
+.loading-questions {
+  height: calc(100vh - 152px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right-section {
+  margin-top: 16px;
+  margin-right: 16px;
+}

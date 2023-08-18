@@ -1,0 +1,54 @@
+<div class="empty-area-main">
+  <div
+    class="empty-drop-area"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="1rem"
+  >
+    <div class="icon">
+      <img
+        src="assets/images/clm-images/no-data-found/empty-area.svg"
+        alt=""
+      />
+    </div>
+    <h1>{{ "Drag And Drop" }}</h1>
+    <p>
+      {{
+        dropAreaSubtitle
+          ? dropAreaSubtitle
+          : "Select the Layout Element from the left pane."
+      }}
+    </p>
+    <ng-container *ngIf="showAddButton">
+      <button
+        class="cst-menu mt-10"
+        color="accent"
+        mat-raised-button
+        [matMenuTriggerFor]="newQuestion"
+        [ngClass]="t.menuOpen ? 'active' : 'inActive'"
+        #t="matMenuTrigger"
+      >
+        <label>{{ "Add New Question" }}</label>
+        <mat-icon class="icomoon Chevron-Down"></mat-icon>
+      </button>
+      <mat-menu
+        #newQuestion="matMenu"
+        xPosition="before"
+        class="mat-toolbar-menu"
+      >
+        <button
+          mat-menu-item
+          *ngFor="let option of options"
+          (click)="selectLayout(option.value)"
+        >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon class="icomoon">
+              <img [src]="option.src" alt="" />
+            </mat-icon>
+            <div>{{ option.displayValue }}</div>
+          </div>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </div>
+</div>

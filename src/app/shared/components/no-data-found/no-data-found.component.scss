@@ -1,0 +1,38 @@
+@import './../../../theme/styles/base/variable.scss';
+
+.common {
+  h1 {
+    font-size: 24px !important;
+    line-height: 31px !important;
+    font-weight: 600 !important;
+    margin: 0 0 16px !important;
+    color: $text-color !important;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    color: $text-color;
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  .add-btn {
+    margin-top: 8px;
+  }
+}
+
+.no-data-container {
+  height: calc(100vh - 53px);
+  @extend .common;
+}
+
+.contract-child {
+  height: calc(100vh - 290px);
+  @extend .common;
+}
+.line-break-subtitle {
+  white-space: pre-line;
+}
+.no-data-wrap-history {
+  height: calc(100vh - 86px);
+}

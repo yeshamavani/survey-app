@@ -1,0 +1,82 @@
+@import './base/variable.scss';
+
+.mat-dialog-container {
+  padding: 0 !important;
+  position: relative;
+
+  .dialog-main-wrapper {
+    .mat-dialog-title {
+      padding: 12px 16px;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      border-bottom: 1px solid $input-border !important;
+      margin: 0 !important;
+      line-height: 22px !important;
+      color: $text-color !important;
+      .close-dialog {
+        position: absolute;
+        right: 0;
+        top: 12px;
+        color: $input-border;
+        z-index: 10;
+        font-size: 13px;
+        .close {
+          padding: 0;
+          line-height: 24px;
+          color: $light-68;
+          max-width: 20px;
+          height: 20px;
+          min-width: auto !important;
+          margin-right: 16px;
+          font-size: 1.5em;
+          .mat-button-focus-overlay {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .mat-dialog-content {
+      min-height: auto;
+      margin: 0;
+      padding: 16px;
+      .mat-radio-button ~ .mat-radio-button {
+        margin-left: 1rem;
+      }
+      &.with-tabs {
+        padding: 0;
+        .mat-tab-header {
+          .mat-tab-label {
+            .mat-tab-label-content {
+              font-size: 13px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
+      .ag-root-wrapper {
+        .ag-root {
+          .ag-row {
+            .ag-cell {
+              cursor: auto;
+            }
+          }
+        }
+      }
+    }
+    .mat-dialog-actions {
+      margin-bottom: 0;
+      padding: 12px 16px;
+      border-top: 1px solid $border-color-dark;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+
+      .mat-button {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+  }
+}

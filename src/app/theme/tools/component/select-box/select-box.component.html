@@ -1,0 +1,540 @@
+<div
+  class="rusdn-form-field"
+  [class.noPadding]="noPadding"
+  [ngSwitch]="type"
+  [attr.data-id]="dataId"
+>
+  <ng-container *ngSwitchCase="'single'">
+    <div fxLayout="column" [attr.data-id]="dataId">
+      <mat-label *ngIf="label" class="input-label"
+        ><span
+          class="input-label-text"
+          [ngClass]="isPanelOpened ? 'opened' : disabled ? 'disabled' : ''"
+          >{{ label }}</span
+        ><span
+          class="required"
+          [ngClass]="isPanelOpened ? 'opened' : disabled ? 'disabled' : ''"
+          *ngIf="required"
+          >*</span
+        >
+        <span
+          *ngIf="infoText"
+          class="info-icon"
+          [matTooltip]="infoText"
+          matTooltipClass="max-width-auto"
+          [matTooltipPosition]="'after'"
+        >
+          <mat-icon class="icomoon Info-Outline"></mat-icon>
+        </span>
+      </mat-label>
+
+      <mat-form-field
+        class="rusdn-form-field"
+        [ngClass]="{
+          'show-select-without-border': showSelectWithoutBorder,
+          'panel-opened': showSelectWithoutBorder && isPanelOpened
+        }"
+        [appearance]="appearance"
+        [color]="color"
+        floatLabel="always"
+        [hideRequiredMarker]="hideRequiredMarker"
+        [attr.automationId]="automationId"
+        [attr.data-id]="dataId"
+      >
+        <i
+          *ngIf="preIcon"
+          class="{{ preIcon }} checkbox-preIcon"
+          [ngStyle]="{
+            margin: margin,
+            color: preIconColor,
+            'font-size': preIconSize
+          }"
+          matPrefix
+          [attr.data-id]="dataId"
+          aria-hidden="true"
+        ></i>
+        <div *ngIf="valueType == 'string'">
+          <mat-select
+            #singleStringSelectBox
+            [id]="isPanelOpened ? 'rotateArrowIcon' : ''"
+            [style.text-transform]="showCapitalize ? 'capitalize' : null"
+            [disableOptionCentering]="true"
+            panelClass="rusdn-form-select-panel {{ panelClass }}"
+            [class.hasPreIcon]="preIcon"
+            [class.placeholder-class]="!!selected"
+            [required]="required"
+            [placeholder]="placeholder"
+            (selectionChange)="selectionChanged(control)"
+            [(ngModel)]="selected"
+            [formControl]="control"
+            [disabled]="disabled"
+            [attr.automationId]="automationId"
+            (openedChange)="handleOpenedChange($event)"
+            fxLayout="column"
+            (closed)="closingSingleSelect()"
+          >
+            <input-text-box
+              *ngIf="showSearch"
+              class="border-none"
+              cssClass="select-search-box"
+              [noPadding]="true"
+              [placeholder]="'LBL_SEARCH' | translate"
+              (textChange)="onSearch($event)"
+              [icon]="'Search'"
+              [control]="searchControl"
+            ></input-text-box>
+            <div
+              class="all-options"
+              id="select-scroller"
+              (scroll)="onScroll($event)"
+            >
+              <mat-option [value]="null" *ngIf="addNoneOption">{{
+                'LBL_NONE' | translate
+              }}</mat-option>
+              <mat-option
+                *ngFor="let option of data"
+                [value]="option"
+                [style.text-transform]="showCapitalize ? 'capitalize' : null"
+                #matOption
+                [matTooltip]="
+                  matOption._getHostElement().offsetWidth <
+                  matTextOption.offsetWidth + 32
+                    ? option
+                    : null
+                "
+                ><span #matTextOption>{{ option }}</span></mat-option
+              >
+              <mat-option
+                *ngIf="(!data || data.length === 0) && emptyPlaceholder"
+                disabled
+                >{{ emptyPlaceholder }}</mat-option
+              >
+            </div>
+          </mat-select>
+        </div>
+
+        <ng-container *ngIf="valueType == 'object' && img == false">
+          <mat-select
+            #singleObjectSelectBox
+            [id]="isPanelOpened ? 'rotateArrowIcon' : ''"
+            panelClass="rusdn-form-select-panel {{ panelClass }}"
+            [style.text-transform]="showCapitalize ? 'capitalize' : null"
+            [class.hasPreIcon]="preIcon"
+            [required]="required"
+            [disabled]="disabled"
+            [class.placeholder-class]="!!selected"
+            [disableOptionCentering]="true"
+            [placeholder]="placeholder"
+            (selectionChange)="selectionChanged(control)"
+            [(ngModel)]="selected"
+            [formControl]="control"
+            [attr.automationId]="automationId"
+            (openedChange)="handleOpenedChange($event)"
+            [attr.data-id]="dataId"
+            fxLayout="column"
+            (closed)="closingSingleSelect()"
+            [matTooltip]="toolTip"
+          >
+            <mat-select-trigger *ngIf="secondLabelKey && selectedObjectValue">
+              <span>
+                <em
+                  *ngIf="icon"
+                  [ngClass]="
+                    selectedObjectValue[iconKey]
+                      ? selectedObjectValue[iconKey]
+                      : ''
+                  "
+                  [ngStyle]="{
+                    backgroundColor: selectedObjectValue[colorKey]
+                  }"
+                ></em>
+                {{ selectedObjectValue[labelKey] }}
+              </span>
+            </mat-select-trigger>
+            <input-text-box
+              *ngIf="showSearch"
+              class="border-none"
+              cssClass="select-search-box"
+              [noPadding]="true"
+              [placeholder]="searchPlaceHolder"
+              (textChange)="onSearch($event)"
+              [icon]="'Search'"
+              [text]="searchControl.value"
+              [control]="searchControl"
+            ></input-text-box>
+            <div
+              class="all-options"
+              id="select-scroller"
+              (scroll)="onScroll($event)"
+            >
+              <mat-option [value]="null" *ngIf="addNoneOption">{{
+                'LBL_NONE' | translate
+              }}</mat-option>
+              <mat-select-trigger *ngIf="icon" [attr.data-id]="dataId">
+                <span *ngFor="let option of data">
+                  <span
+                    *ngIf="
+                      option[valueKey] === selected ||
+                      option[valueKey] === control.value
+                    "
+                  >
+                    <em
+                      *ngIf="icon"
+                      [ngClass]="option[iconKey] ? option[iconKey] : ''"
+                      [ngStyle]="{
+                        backgroundColor: option[colorKey]
+                      }"
+                    ></em>
+                    {{ option[labelKey] }}
+                  </span>
+                </span>
+              </mat-select-trigger>
+              <mat-option
+                *ngFor="let option of data"
+                [disabled]="option?.disabled"
+                [ngClass]="{
+                  hide: option.hidden,
+                  'two-display-value': secondLabelKey
+                }"
+                [value]="option[valueKey]"
+                [style.text-transform]="showCapitalize ? 'capitalize' : null"
+                [attr.data-id]="dataId"
+                #matOption
+                [matTooltip]="
+                  matOption._getHostElement().offsetWidth <
+                  matTextOption.offsetWidth + 32
+                    ? option[tooltipKey]
+                    : isTooltipMandatory
+                    ? option[tooltipKey]
+                    : null
+                "
+              >
+                <em
+                  *ngIf="icon"
+                  [ngClass]="option[iconKey] ? option[iconKey] : ''"
+                  [ngStyle]="{
+                    backgroundColor: option[colorKey]
+                  }"
+                ></em>
+                <span #matTextOption>{{ option[labelKey] }}</span>
+                <div class="list-container" *ngIf="secondLabelKey">
+                  <span [matTooltip]="option[secondLabelKey]" class="ellipsis"
+                    >{{ secondLabelPrefix }}{{ option[secondLabelKey] }}</span
+                  >
+                </div>
+              </mat-option>
+              <mat-option
+                *ngIf="(!data || data.length === 0) && emptyPlaceholder"
+                disabled
+                >{{ emptyPlaceholder }}</mat-option
+              >
+              <mat-option *ngIf="loading" class="loader-wrapper" #matOption>
+                <div class="loader-dot">
+                  <div class="ag-dot-flashing"></div>
+                  <div class="ag-dot-flashing"></div>
+                  <div class="ag-dot-flashing"></div>
+                </div>
+              </mat-option>
+            </div>
+          </mat-select>
+        </ng-container>
+        <ng-container *ngIf="valueType == 'object' && img == true">
+          <mat-select
+            #singleObjectWithImgSelectBox
+            [id]="isPanelOpened ? 'rotateArrowIcon' : ''"
+            panelClass="rusdn-form-select-panel {{ panelClass }}"
+            [style.text-transform]="showCapitalize ? 'capitalize' : null"
+            [class.hasPreIcon]="preIcon"
+            [required]="required"
+            [disableOptionCentering]="true"
+            [placeholder]="placeholder"
+            (selectionChange)="selectionChanged(control)"
+            [(ngModel)]="selected"
+            [(value)]="selected"
+            [formControl]="control"
+            [attr.automationId]="automationId"
+            (openedChange)="handleOpenedChange($event)"
+            [attr.data-id]="dataId"
+            fxLayout="column"
+            (closed)="closingSingleSelect()"
+          >
+            <input-text-box
+              *ngIf="'LBL_SEARCH' | translate"
+              cssClass="select-search-box"
+              [noPadding]="true"
+              [placeholder]="'LBL_SEARCH' | translate"
+              (textChange)="onSearch($event)"
+            ></input-text-box>
+            <div
+              class="all-options"
+              id="select-scroller"
+              (scroll)="onScroll($event)"
+            >
+              <mat-option
+                *ngFor="let option of data"
+                [value]="option[valueKey]"
+                [style.text-transform]="showCapitalize ? 'capitalize' : null"
+              >
+                <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                  <div style="margin-right: 1.231em">
+                    {{ option[labelKey] }}
+                  </div>
+                  <div>
+                    <img [src]="option.imgsrc" alt="" />
+                  </div>
+                </div>
+              </mat-option>
+              <mat-option
+                *ngIf="(!data || data.length === 0) && emptyPlaceholder"
+                disabled
+                >{{ emptyPlaceholder }}</mat-option
+              >
+            </div>
+          </mat-select>
+        </ng-container>
+
+        <mat-error *ngIf="control.invalid && touched">{{
+          errMessage
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'multiple'">
+    <div fxLayout="column">
+      <mat-label
+        *ngIf="label"
+        class="input-label"
+        [ngClass]="isPanelOpened ? 'opened' : disabled ? 'disabled' : ''"
+      >
+        <span
+          class="input-label-text"
+          [ngClass]="isPanelOpened ? 'opened' : disabled ? 'disabled' : ''"
+          >{{ label }}</span
+        >
+        <span
+          class="required"
+          [ngClass]="isPanelOpened ? 'opened' : disabled ? 'disabled' : ''"
+          *ngIf="required"
+        >
+          *
+        </span>
+        <span
+          *ngIf="infoText"
+          class="info-icon"
+          [matTooltip]="infoText"
+          matTooltipClass="max-width-auto"
+          [matTooltipPosition]="'after'"
+        >
+          <mat-icon class="icomoon Info-Outline"></mat-icon>
+        </span>
+      </mat-label>
+      <mat-form-field
+        class="rusdn-form-field"
+        [ngClass]="{
+          'show-select-without-border': showSelectWithoutBorder,
+          'panel-opened': showSelectWithoutBorder && isPanelOpened
+        }"
+        appearance="outline"
+        [color]="color"
+        floatLabel="always"
+        [hideRequiredMarker]="hideRequiredMarker"
+      >
+        <i
+          *ngIf="preIcon"
+          class="{{ preIcon }} checkbox-preIcon"
+          matPrefix
+          aria-hidden="true"
+        ></i>
+        <ng-container *ngIf="valueType == 'string'">
+          <mat-select
+            #multipleStringSelectBox
+            [id]="isPanelOpened ? 'rotateArrowIcon' : ''"
+            panelClass="rusdn-form-select-panel {{ panelClass }}"
+            [class.hasPreIcon]="preIcon"
+            [disableOptionCentering]="true"
+            [style.text-transform]="showCapitalize ? 'capitalize' : null"
+            [required]="required"
+            [placeholder]="placeholder"
+            multiple
+            (selectionChange)="selectionChanged(control)"
+            [(ngModel)]="selected"
+            [formControl]="control"
+            [disabled]="disabled"
+            [attr.automationId]="automationId"
+            (openedChange)="handleOpenedChange($event)"
+            fxLayout="column"
+            (closed)="closingSingleSelect()"
+          >
+            <input-text-box
+              *ngIf="showSearch"
+              class="border-none"
+              cssClass="select-search-box"
+              [noPadding]="true"
+              [placeholder]="'LBL_SEARCH' | translate"
+              (textChange)="onSearch($event)"
+              [icon]="'Search'"
+              [control]="searchControl"
+            ></input-text-box>
+            <mat-select-trigger *ngIf="trigger">
+              <ng-container *ngIf="triggerType === 'all'">
+                {{
+                  multipleObjectSelectBox.value?.length > data?.length
+                    ? 'All'
+                    : selectedNames
+                }}
+              </ng-container>
+              <ng-container *ngIf="triggerType === 'completed'">
+                {{ control.value ? control.value[0] : '' }}
+                <span
+                  *ngIf="control.value?.length > 1"
+                  class="additional-selection"
+                >
+                  (+{{ control.value.length - 1 }}
+                  {{ control.value?.length === 2 ? 'other' : 'others' }})
+                </span>
+              </ng-container>
+            </mat-select-trigger>
+            <div
+              class="all-options"
+              id="select-scroller"
+              (scroll)="onScroll($event)"
+            >
+              <mat-checkbox
+                #allCheckBox
+                color="primary"
+                class="all-checkbox"
+                [(ngModel)]="allSelectedValues"
+                (change)="toggleAllSelectionString($event.checked)"
+                ><span>{{ 'LBL_ALL' | translate }}</span></mat-checkbox
+              >
+              <mat-option
+                *ngFor="let option of data"
+                [value]="option"
+                [style.text-transform]="showCapitalize ? 'capitalize' : null"
+                >{{ option }}</mat-option
+              >
+              <span
+                class="emptyText"
+                *ngIf="(!data || data.length === 0) && emptyPlaceholder"
+              >
+                <mat-option disabled>{{ emptyPlaceholder }}</mat-option>
+              </span>
+            </div>
+          </mat-select>
+        </ng-container>
+
+        <ng-container *ngIf="valueType == 'object'">
+          <mat-select
+            (closed)="closingMultiSelect()"
+            #multipleObjectSelectBox
+            [id]="isPanelOpened ? 'rotateArrowIcon' : ''"
+            panelClass="rusdn-form-select-panel {{ panelClass }}"
+            [class.hasPreIcon]="preIcon"
+            [disableOptionCentering]="true"
+            [style.text-transform]="showCapitalize ? 'capitalize' : null"
+            [required]="required"
+            [placeholder]="placeholder"
+            (selectionChange)="selectionChanged(control)"
+            [(ngModel)]="selected"
+            [formControl]="control"
+            [disabled]="disabled"
+            (openedChange)="handleOpenedChange($event)"
+            fxLayout="column"
+            multiple
+          >
+            <input-text-box
+              #inputSearchBoxMultiSelect
+              *ngIf="showSearch"
+              class="border-none"
+              cssClass="select-search-box"
+              [noPadding]="true"
+              [placeholder]="'LBL_SEARCH' | translate"
+              (textChange)="onSearch($event)"
+              [icon]="'Search'"
+              [text]="searchControl.value"
+              [control]="searchControl"
+            ></input-text-box>
+            <div class="info-option" *ngIf="matOptionInfoText">
+              <mat-icon class="icomoon Info-Outline"> </mat-icon>
+
+              <span class="info-option-text">{{ matOptionInfoText }}</span>
+            </div>
+            <div class="info-option" *ngIf="noDataFoundText">
+              <span class="info-option-text">{{ noDataFoundText }}</span>
+            </div>
+            <mat-select-trigger *ngIf="trigger">
+              <ng-container *ngIf="triggerType === 'all'">
+                {{
+                  multipleObjectSelectBox?.value?.length >= data?.length
+                    ? 'All'
+                    : selectedNames
+                }}
+              </ng-container>
+            </mat-select-trigger>
+            <div
+              class="all-options"
+              [ngClass]="{
+                'mat-option-info': matOptionInfoText || noDataFoundText
+              }"
+              id="select-scroller"
+              (scroll)="onScroll($event)"
+            >
+              <mat-checkbox
+                #allCheckBox
+                *ngIf="trigger && showAllOption && data?.length"
+                color="primary"
+                class="all-checkbox"
+                [(ngModel)]="allSelectedValues"
+                (change)="toggleAllSelectionObject($event.checked)"
+                ><span>{{ 'LBL_SELECT_ALL' | translate }}</span></mat-checkbox
+              >
+              <mat-option
+                *ngFor="let option of []"
+                [value]="option[valueKey]"
+                >{{ option[labelKey] }}</mat-option
+              >
+              <mat-option
+                *ngFor="let option of data"
+                #matOption
+                [value]="option[valueKey]"
+                [disabled]="option?.disabled"
+                [style.text-transform]="showCapitalize ? 'capitalize' : null"
+                [class.text-strike]="textStrike"
+                [ngClass]="{hide: option.hidden}"
+                [class]="secondLabelKey ? 'two-display-value' : ''"
+              >
+                <div class="list-container">
+                  <span
+                    class="ellipsis w-100"
+                    [matTooltip]="option[labelKey]"
+                    >{{ option[labelKey] }}</span
+                  >
+                  <mat-chip *ngIf="countKey">
+                    {{ option[countKey] }}
+                  </mat-chip>
+                </div>
+                <div class="list-container" *ngIf="secondLabelKey">
+                  <span
+                    [matTooltip]="option[secondLabelKey]"
+                    class="ellipsis"
+                    >{{ option[secondLabelKey] }}</span
+                  >
+                </div>
+              </mat-option>
+              <span
+                class="emptyText"
+                *ngIf="(!data || data.length === 0) && emptyPlaceholder"
+              >
+                <mat-option disabled>{{ emptyPlaceholder }}</mat-option>
+              </span>
+            </div>
+          </mat-select>
+        </ng-container>
+        <mat-error *ngIf="control.invalid && touched">{{
+          errMessage
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,36 @@
+@import '../../../theme/styles/base/variable.scss';
+
+.copy-input-box {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+
+  ::ng-deep .rusdn-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+      color: $my-app-accent-100;
+      .mat-form-field-outline {
+        color: $my-app-accent-100 !important;
+        .mat-form-field-outline-start {
+          background-color: $my-app-accent-100;
+          border-color: $my-app-accent-100 !important;
+        }
+        .mat-form-field-outline-end {
+          background-color: $my-app-accent-100;
+          border-color: $my-app-accent-100 !important;
+        }
+      }
+      .mat-form-field-infix {
+        color: $light-text;
+        .mat-input-element {
+          color: $light-text;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    mat-form-field div.mat-form-field-infix {
+      padding: 0.9em 0 0.9em 0 !important;
+    }
+  }
+}

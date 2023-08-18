@@ -1,0 +1,73 @@
+@import '../../../../theme/styles/base/variable.scss';
+
+.left-section {
+  background-color: $color-white;
+  .left-hdr {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 14px 16px;
+    p {
+      margin: 0;
+    }
+  }
+  .left-main-content {
+    height: calc(100vh - 154px);
+    overflow: auto;
+    padding: 16px;
+    .drop-list {
+      .q-options {
+        border: 1px solid $input-border;
+        border-radius: 4px;
+        padding: 9px 10px 9px 15px;
+        background-color: $color-white;
+        &.selected {
+          border: 1px solid $purple-700;
+        }
+        .mat-icon {
+          color: $light-68;
+          width: 18px;
+          font-size: 18px;
+          height: 18px;
+        }
+        .options-lhs {
+          .panel-title {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 18px;
+            color: $text-color;
+          }
+        }
+        .options-rhs {
+          .dragHandle {
+            color: $border-color-dark;
+          }
+        }
+      }
+      &.cdk-drop-list-dragging {
+        .cdk-drag {
+          cursor: grabbing;
+          &.cdk-drag-placeholder {
+            border-color: $purple-600;
+            background-color: $color-white;
+          }
+        }
+      }
+      .cdk-drag {
+        cursor: grab;
+      }
+    }
+  }
+}
+.cdk-drag-preview {
+  border: 1px solid $purple-700;
+  border-radius: 4px;
+  padding: 9px 10px 9px 15px;
+  background-color: $color-white;
+  .mat-icon {
+    color: $light-68;
+    width: 18px;
+    font-size: 18px;
+    height: 18px;
+  }
+}

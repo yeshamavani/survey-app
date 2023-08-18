@@ -1,0 +1,405 @@
+@import '../../../../theme/styles/base/variable.scss';
+
+.mat-expansion-panel {
+  border: 1px solid $color-white;
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+  &.focus-question {
+    border: 1px solid $purple-600;
+  }
+  &.highlight-question {
+    border: 1px solid $alert-error-font;
+  }
+  &.response-question {
+    border: 1px solid $input-border;
+    border-radius: 4px;
+    break-inside: avoid;
+    margin-bottom: 16px !important;
+    &.highlight-question {
+      border: 1px solid $alert-error-font;
+    }
+  }
+
+  ::ng-deep .mat-expansion-panel-header {
+    pointer-events: none;
+    height: auto;
+    background: $color-white;
+    padding: 16px 32px;
+    &:hover {
+      background-color: transparent !important;
+    }
+    .mat-expansion-indicator {
+      display: none;
+    }
+    .mat-content {
+      flex-direction: column !important;
+      .panel-top {
+        pointer-events: visibleFill;
+        .panel-lhs {
+          .toggle-panel {
+            pointer-events: visibleFill;
+            height: auto !important;
+            width: auto !important;
+          }
+          .cst-menu,
+          label {
+            padding: 0;
+            margin: 0;
+            height: auto;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            label {
+              cursor: pointer;
+              max-width: 120px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+            .tri-Down {
+              width: 0;
+              height: 0;
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-top: 8px solid $light-68;
+              margin-left: 11px;
+            }
+          }
+          .panel-title {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 20px;
+            color: $text-color;
+            display: flex;
+            align-items: center;
+            ::ng-deep .mat-icon {
+              color: $alert-error-font;
+              margin-right: 8px;
+              font-size: 17px;
+            }
+          }
+          .weightage-panel {
+            max-height: 24px;
+            align-items: center;
+            .v-divider {
+              border-color: $border-color;
+              height: 12px;
+              width: 1px;
+            }
+            .weightage {
+              margin-left: 8px;
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
+              .weightage-input {
+                margin-left: 4px;
+                ::ng-deep .mat-form-field-wrapper {
+                  margin: 0;
+                  line-height: normal;
+                  .mat-form-field-flex {
+                    padding: 0 12px 0 12px;
+                    height: 26px;
+                    width: 90px;
+                    min-height: auto;
+                    margin-top: auto;
+                    .mat-form-field-infix {
+                      padding: 2px 3px 0 0 !important;
+                      font-weight: 600;
+                      text-align: center;
+                      .mat-form-field-label-wrapper {
+                        padding: 0;
+                        top: 0;
+                      }
+                    }
+                    .mat-form-field-suffix {
+                      span {
+                        top: auto;
+                        color: $light-text;
+                      }
+                    }
+                  }
+                  .mat-form-field-subscript-wrapper {
+                    position: absolute !important;
+                    top: auto;
+                    left: 0;
+                    width: 310px;
+                    bottom: -16px;
+                    padding: 0;
+                  }
+                }
+              }
+            }
+            .disabled-none-weightage {
+              width: 56px;
+              border-radius: 4px;
+              padding: 2px 12px;
+              background-color: $btn-disable-border;
+              margin-left: 4px;
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
+              color: $my-app-accent-400;
+            }
+          }
+        }
+        .panel-rhs {
+          .mat-icon-button {
+            height: 20px !important;
+            width: 20px !important;
+            font-size: 14px;
+            color: $light-68;
+          }
+          .weightage {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            color: $text-color;
+          }
+          .children-count {
+            background: $input-border;
+            border-radius: 4px;
+            width: 48px;
+            height: 24px;
+            padding: 4px 8px;
+            .mat-icon {
+              font-size: 15px;
+              color: $color-black;
+              width: auto;
+              height: auto;
+            }
+            span {
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+          .new-question-label {
+            background-color: $alert-info-bg;
+            span {
+              color: $alert-info-font;
+            }
+          }
+        }
+      }
+      .panel-bottom {
+        pointer-events: visibleFill;
+        margin-top: 24px;
+        .question-title {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          color: $text-color;
+          word-break: break-word;
+          p {
+            margin: 0;
+          }
+        }
+        .question-count {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          color: $my-app-accent-800;
+          margin-right: 8px;
+        }
+        .mandatory-mark {
+          color: $my-app-primary-700;
+          font-size: 20px;
+          line-height: 13px;
+        }
+        .response-followup-text {
+          padding-bottom: 16px;
+          align-items: center;
+          .info-icon {
+            width: auto;
+            height: auto;
+            align-items: center;
+            margin: 0 8px 0 2px;
+            color: $my-app-accent-600;
+            font-size: 16px;
+          }
+          span {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            color: $my-app-accent-600;
+          }
+        }
+        .question-title-input {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          border: 0 none !important;
+          padding: 0 !important;
+          resize: none;
+          &:focus-visible {
+            outline: none;
+          }
+          &::placeholder {
+            font-weight: 400;
+            color: $light-text !important;
+          }
+        }
+        .add-question-title {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          color: $text-color;
+        }
+        label {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 18px;
+          margin: 4px 0 0;
+          color: $light-68;
+        }
+      }
+    }
+  }
+  ::ng-deep .mat-expansion-panel-content {
+    .mat-expansion-panel-body {
+      padding: 0 0 16px;
+    }
+  }
+}
+
+.drag-handler {
+  .drag-question {
+    visibility: hidden;
+    margin-left: -26px;
+    position: absolute;
+
+    .dragHandle {
+      color: $my-app-accent-600 !important;
+    }
+  }
+  &:hover {
+    .drag-question {
+      visibility: visible;
+    }
+  }
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+.mr-5 {
+  margin-right: 5px !important;
+}
+
+::ng-deep .mx-600 {
+  max-width: 600px;
+}
+.mw-200 {
+  max-width: 200px;
+}
+::ng-deep .cdk-overlay-pane .mat-menu-panel {
+  &.mat-toolbar-menu {
+    max-height: 204px;
+  }
+}
+
+//Below scss for connecting lines in questnairre
+.child-question {
+  margin-left: 32px;
+  &.followup-elm-parallel {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      width: 2px;
+      top: 2px;
+      background: $grey-br;
+      height: 100%;
+    }
+  }
+}
+.follow-up,
+.has-connection {
+  margin-top: 24px !important;
+  position: relative;
+  display: block;
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='51' viewBox='0 0 25 51' fill='none'%3E%3Cpath d='M1 0V38.1579C1 44.698 9.059 50 19 50H25' stroke='%23D1D5DB' stroke-width='2'/%3E%3C/svg%3E");
+    left: -25px;
+    top: -23px;
+    width: 40px;
+    height: 57px;
+    background-color: transparent;
+    display: block;
+    z-index: 1;
+    background-repeat: no-repeat;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: -25px;
+    width: 2px;
+    top: 2px;
+    background: $grey-br;
+    height: 100%;
+  }
+  &:last-child {
+    &::after {
+      height: 0;
+    }
+  }
+}
+
+.has-connection {
+  &::before {
+    left: 7px;
+  }
+  &::after {
+    left: 7px;
+  }
+  ::ng-deep .q-grey-box {
+    margin: 0 0 0 32px !important;
+    padding: 0;
+  }
+}
+
+.question-card-wrapper {
+  border: 1px solid $input-border;
+  .show-error-msg {
+    color: $alert-error-font;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 32px;
+    align-items: center;
+    margin-top: 12px;
+    mat-icon {
+      margin-right: 5px;
+    }
+  }
+}
+
+.dependent-question {
+  background: $input-border;
+  border-radius: 4px;
+  width: 110px;
+  height: 24px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  pointer-events: visibleFill;
+  .mat-icon {
+    font-size: 16px;
+    background: $my-app-accent-700;
+    color: $color-white;
+    height: auto;
+    width: auto;
+    border-radius: 50%;
+  }
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    margin-left: 5px;
+  }
+}
+.width-auto {
+  width: auto !important;
+}

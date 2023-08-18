@@ -1,0 +1,167 @@
+@import '../../../theme/styles/base/variable.scss';
+
+.name-label {
+  font-family: $rakuten-font;
+  font-size: 12px;
+  line-height: 16px;
+  color: $input-label-color;
+  margin-left: 0.92307692em;
+}
+
+.description-label {
+  font-family: $rakuten-font;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  color: $text-color;
+  max-width: 244px;
+  text-align: center;
+  margin: 0 !important;
+}
+.footer-label {
+  font-family: $rakuten-font;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+  color: $text-color;
+  max-width: 350px;
+  text-align: center;
+  margin: 0 !important;
+}
+.mat-icon {
+  margin-right: 5px;
+  color: $alert-error-font;
+  height: 16px;
+  width: 16px;
+  font-size: 15px;
+  margin-top: 1px;
+}
+.warning-msg {
+  @extend .description-label;
+  max-width: 260px;
+  padding: 24px 0 16px;
+  color: $color-black;
+
+  .msg {
+    font-size: 13px;
+  }
+}
+.dialog-checkbox {
+  margin-top: 16px;
+}
+.dialog-note {
+  font-family: $rakuten-font;
+  font-style: normal;
+  font-size: 14px;
+  margin: 4px auto;
+  color: $text-color;
+  text-align: center;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.cancel-btn:hover {
+  &.hover {
+    color: $input-label-color !important;
+  }
+}
+.delete-dialog {
+  .mat-dialog-title {
+    font-family: $rakuten-font;
+    padding: 12px 16px;
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: $text-color;
+    border-bottom: none;
+    .close {
+      cursor: pointer;
+      color: $light-text;
+    }
+  }
+  ::ng-deep .mat-dialog-content {
+    display: block;
+    margin: 0;
+    padding: 0 16px;
+    align-items: center;
+
+    .dialog-icon {
+      display: flex;
+      margin: 0 auto 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid $input-border;
+      color: $light-68;
+      font-size: 22px;
+      &.info-graph-icons {
+        border: 0 none;
+        margin: 32px auto 24px;
+      }
+    }
+  }
+
+  ::ng-deep .mat-dialog-actions {
+    font-family: $rakuten-font;
+    padding: 24px 1rem 50px;
+    margin-bottom: 0;
+    border: none;
+
+    .delete-btn {
+      height: 40px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden !important;
+  padding: 0;
+}
+::ng-deep .changeConfirmationDialog {
+  .description-label {
+    max-width: 232px;
+  }
+  .warning-msg {
+    max-width: 295px;
+    padding: 16px 0 0;
+  }
+}
+::ng-deep .delete-clause {
+  .warning-msg {
+    max-width: 285px;
+    padding: 0 0 16px;
+  }
+}
+
+::ng-deep .pending-users-dialog {
+  .description-label {
+    max-width: 382px;
+  }
+  .warning-msg {
+    max-width: 290px;
+    padding: 3px 0 12px;
+  }
+}
+
+::ng-deep .confirmationModalScorecardDetails {
+  .dialog-note {
+    margin-bottom: 0;
+  }
+  .warning-msg {
+    max-width: 312px;
+    padding: 13px 0 0;
+    margin-top: 0 !important;
+  }
+}
+::ng-deep .allowSwapping {
+  .warning-msg {
+    max-width: 213px;
+  }
+}

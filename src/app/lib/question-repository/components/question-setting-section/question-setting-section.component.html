@@ -1,0 +1,65 @@
+<div class="hdr-main">
+  <div
+    class="title-col"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap="10px"
+  >
+    <span class="title">Question Setting</span>
+    <mat-icon
+      class="icomoon close close-btn cursor-pointer"
+      (click)="close()"
+    ></mat-icon>
+  </div>
+</div>
+<div
+  class="right-sidenav-option"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="1rem"
+>
+  <div class="w-100">
+    <select-box
+      [noPadding]="true"
+      value-key="value"
+      label-key="displayValue"
+      [type]="'single'"
+      [label]="'Question Layout'"
+      placeholder="Checkbox"
+      [data]="questionLayoutType"
+      [selected]="vendorDetailsForm.get('questionType')?.value"
+      [control]="vendorDetailsForm.get('questionType')"
+      (selectClosed)="questionTypeDropdownClosed()"
+    ></select-box>
+  </div>
+  <div class="w-100">
+    <mat-slide-toggle
+      class="cst-mat-slide-toggle"
+      [color]="color"
+      [checked]="question.isScoreEnabled"
+      (change)="toggle($event, scoreOrFollowUp.SCORE)"
+      [disabled]="
+        (question.questionType !== 'Single Selection' &&
+          question.questionType !== 'Drop Down') ||
+        question.parentQuestionId
+      "
+      >Enable Score</mat-slide-toggle
+    >
+  </div>
+  <div class="w-100">
+    <mat-slide-toggle
+      class="cst-mat-slide-toggle"
+      [color]="color"
+      [checked]="true"
+      [matTooltip]="
+        depth < folloupQuestionsLimit
+          ? ''
+          : 'User can add utmost 2 level follow up questions'
+      "
+      matTooltipClass="word-break"
+      [disabled]="!(depth < folloupQuestionsLimit)"
+      (change)="toggle($event, scoreOrFollowUp.FOLLOWUP)"
+      >Enable Follow Up Questions</mat-slide-toggle
+    >
+  </div>
+</div>

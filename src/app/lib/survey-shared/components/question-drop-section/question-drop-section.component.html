@@ -1,0 +1,69 @@
+<div
+  class="questions-drop-area q-grey-box"
+  [ngClass]="showWrapper ? '' : 'no-right-space'"
+>
+  <div class="questions-drop" fxLayout="column">
+    <ng-container *ngIf="showButton">
+      <div class="option-text ellipsis" [matTooltip]="buttonText ?? ''">
+        {{ buttonText }}
+      </div>
+    </ng-container>
+    <div
+      class="w-100"
+      fxFlex
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="1rem"
+    >
+      <div class="icon">
+        <img [src]="img" alt="" />
+      </div>
+      <h1>{{ titleText }}</h1>
+      <p [innerHtml]="subTitleText"></p>
+      <ng-container *ngIf="showLayoutOptionsForFollowUp">
+        <button
+          class="cst-menu"
+          color="accent"
+          mat-raised-button
+          [matMenuTriggerFor]="newQuestion"
+          [ngClass]="t.menuOpen ? 'active' : 'inActive'"
+          #t="matMenuTrigger"
+        >
+          <label>Add New Question</label>
+          <mat-icon class="icomoon Chevron-Down"></mat-icon>
+        </button>
+        <mat-menu
+          #newQuestion="matMenu"
+          xPosition="before"
+          class="mat-toolbar-menu"
+        >
+          <button
+            mat-menu-item
+            *ngFor="let option of questionLayoutOptions"
+            (click)="selectedFollowUpLayout(option.value)"
+          >
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <mat-icon class="icomoon">
+                <img [src]="option.src" alt="" />
+              </mat-icon>
+              <div>{{ option.displayValue }}</div>
+            </div>
+          </button>
+        </mat-menu>
+        <mat-divider
+          *ngIf="!showLayoutOptionsForFollowUp"
+          class="vertical-divider"
+          [vertical]="true"
+        ></mat-divider>
+      </ng-container>
+      <button
+        class="color-tertiary cst-menu cancel-btn"
+        (click)="cancel()"
+        *ngIf="showButton"
+        mat-button
+      >
+        <label class="cursor-pointer">Cancel</label>
+      </button>
+    </div>
+  </div>
+</div>

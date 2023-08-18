@@ -1,0 +1,149 @@
+@import '../../../styles/base/mixin.scss';
+
+.input-disabled {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+}
+.rusdn-form-field {
+  width: 100%;
+  position: relative;
+  &.noPadding {
+    ::ng-deep {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+    }
+  }
+  .text-label-container {
+    .text-label {
+      cursor: pointer;
+      color: map_get($rex-colors, 'form-hover');
+    }
+  }
+  &.suffixText {
+    ::ng-deep .mat-form-field-suffix {
+      span {
+        z-index: 2;
+        position: relative;
+        top: -0.25em;
+      }
+    }
+  }
+}
+.pink-background {
+  background-color: $color-primary;
+}
+.gray-background {
+  background-color: #9c9c9c;
+}
+.date,
+.times {
+  .date-picker-icon {
+    height: em(44.5);
+    width: em(52);
+    @include flex-content();
+    cursor: pointer;
+    label,
+    span {
+      color: white;
+      cursor: pointer;
+      font-size: 2em;
+    }
+    .GB {
+      font-size: 1.4em;
+    }
+  }
+  .date-picker-icon-left {
+    margin: em(-1.2) em(5) 0 em(-11);
+    border-radius: 5px 0 0 5px;
+  }
+  .date-picker-icon-right {
+    height: em(45.5) !important;
+    margin: em(-1.5) em(-11) 0 0;
+    border-radius: 0 5px 5px 0;
+  }
+  ::ng-deep {
+    .mat-form-field-infix {
+      display: flex;
+    }
+    .mat-form-field-label {
+      transform: translateY(-0.5em) scale(0.75) !important;
+    }
+  }
+}
+
+.input-area {
+  ::ng-deep {
+    .mat-form-field-flex {
+      height: unset !important;
+    }
+    .mat-form-field-label {
+      transform: translateY(-1em) scale(0.75) !important;
+    }
+  }
+}
+
+::ng-deep {
+  .input-date-toggle-btn-right {
+    button {
+      top: -0.08em !important;
+    }
+  }
+  #time-picker-wrapper {
+    #time-picker {
+      width: 25em !important;
+      .time-picker-header {
+        padding: 1.154em 0em !important;
+        .time-picker-selected-time {
+          font-size: 2.692em !important;
+          padding: 0.385em 0 !important;
+        }
+        .time-picker-selected-ampm {
+          font-size: 1.385em !important;
+          .time-picker-am,
+          .time-picker-pm {
+            padding: 0 0.385em !important;
+          }
+        }
+      }
+      .time-picker-content {
+        .time-picker-clock {
+          // height: 16.385em !important;
+          // width: 16.385em !important;
+          padding: 1.846em !important;
+          margin: 1.923em auto !important;
+          button {
+            width: 2.692em !important;
+            height: 2.692em !important;
+          }
+          .time-picker-clock-origin {
+            width: 0.462em !important;
+            height: 0.462em !important;
+            margin-left: -0.231em !important;
+            margin-top: -0.631em !important;
+          }
+          .time-picker-clock-arrow {
+            width: 0.154em !important;
+            top: 1.692em !important;
+          }
+        }
+      }
+      .time-picker-footer {
+        padding: 1.154em !important;
+        button {
+          margin-left: 0.769em !important;
+          padding: 0.769em !important;
+          border-radius: 0.154em !important;
+        }
+      }
+    }
+  }
+}
+
+mat-label {
+  margin-bottom: 8px !important;
+}

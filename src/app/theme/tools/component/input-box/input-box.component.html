@@ -1,0 +1,481 @@
+<div
+  class="rusdn-form-field {{ cssClass }}"
+  [class.noPadding]="noPadding"
+  [ngSwitch]="type"
+>
+  <ng-container *ngSwitchCase="'text'">
+    <div fxLayout="column">
+      <mat-label
+        *ngIf="!achievementInput && !weighatgeEdit && !nolabel"
+        class="input-label"
+        [ngClass]="
+          inFocus
+            ? 'opened-input'
+            : readOnlyText
+            ? 'read-only-text'
+            : disabled || readonly
+            ? 'disabled'
+            : ''
+        "
+        [matTooltip]="tooltipHint"
+        [matTooltipDisabled]="!tooltipHint"
+        [matTooltipPosition]="tooltipPosition"
+        >{{ label
+        }}<span class="required" *ngIf="required && !hideRequiredMarker"
+          >*</span
+        ></mat-label
+      >
+      <mat-form-field
+        class="rusdn-form-field"
+        [class.suffixText]="suffixText"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <input
+          (focusout)="onFocusOutEvent($event)"
+          (ngModelChange)="change($event)"
+          (keydown)="_keyUp($event)"
+          matInput
+          type="text"
+          [id]="_id"
+          [autocomplete]="autoCompleteRequired ? placeholder : 'turnoff'"
+          [disabled]="disabled"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          [required]="required"
+          [readonly]="readonly"
+          [placeholder]="placeholder"
+          [(ngModel)]="text"
+          [maxlength]="maxlength ?? null"
+          [minlength]="minlength"
+          [pattern]="pattern"
+          [formControl]="control"
+          [attr.automationId]="automationId"
+          (paste)="pasteTextNumber($event)"
+          [mask]="maskValue"
+          [suffix]="maskSuffix"
+          [prefix]="maskPrefix"
+          (focusin)="inputBoxFocus(true)"
+          (focusout)="inputBoxFocus(false)"
+        />
+        <button
+          mat-button
+          *ngIf="icon"
+          matSuffix
+          mat-icon-button
+          (click)="onIconClickHandle($event)"
+        >
+          <mat-icon
+            [style.color]="'#686868'"
+            [fontSet]="'icomoon'"
+            [fontIcon]="icon"
+          ></mat-icon>
+        </button>
+        <span *ngIf="suffixText" matSuffix>{{ suffixText }}</span>
+        <mat-icon
+          matPrefix
+          class="prefix-icon"
+          *ngIf="prefixIcon"
+          [style.color]="'#686868'"
+          [fontSet]="'icomoon'"
+          [fontIcon]="prefixIcon"
+        ></mat-icon>
+        <span *ngIf="prefixText" matPrefix>{{ suffixText }}</span>
+        <mat-hint *ngIf="description" [align]="'start'"
+          ><strong>{{ description }}</strong>
+        </mat-hint>
+        <mat-hint *ngIf="hintText" class="hint-text" [align]="'start'"
+          >{{ hintText }}
+        </mat-hint>
+        <mat-hint *ngIf="maxlength && showCharCount" [align]="'end'"
+          >{{ text ? text.length : 0 }} / {{ maxlength }}</mat-hint
+        >
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'email'">
+    <div fxLayout="column">
+      <mat-label
+        class="input-label"
+        [ngClass]="
+          inFocus ? 'opened-input' : disabled || readonly ? 'disabled' : ''
+        "
+        >{{ label }}<span class="required" *ngIf="required">*</span></mat-label
+      >
+      <mat-form-field
+        class="rusdn-form-field"
+        [class.suffixText]="suffixText"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <input
+          (focusout)="onFocusOutEvent($event)"
+          (ngModelChange)="change($event)"
+          (paste)="onPaste($event)"
+          matInput
+          type="email"
+          [id]="_id"
+          [autocomplete]="autoCompleteRequired ? placeholder : 'turnoff'"
+          autocorrect="off"
+          autocapitalize="off"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          spellcheck="false"
+          [required]="required"
+          [readonly]="readonly"
+          [email]="email"
+          [placeholder]="placeholder"
+          [(ngModel)]="text"
+          [maxlength]="maxlength ?? null"
+          [pattern]="pattern"
+          [formControl]="control"
+          [attr.automationId]="automationId"
+          (focusin)="inputBoxFocus(true)"
+          (focusout)="inputBoxFocus(false)"
+        />
+        <span *ngIf="suffixText" matSuffix>{{ suffixText }}</span>
+        <mat-hint *ngIf="maxlength" align="end"
+          >{{ text.length }} / {{ maxlength }}</mat-hint
+        >
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'area'">
+    <div fxLayout="column">
+      <mat-label
+        class="input-label"
+        [ngClass]="
+          inFocus ? 'opened-input' : disabled || readonly ? 'disabled' : ''
+        "
+        >{{ label }}<span class="required" *ngIf="required">*</span></mat-label
+      >
+      <mat-form-field
+        class="rusdn-form-field input-area"
+        [class.suffixText]="suffixText"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <textarea
+          (focusout)="onFocusOutEvent($event)"
+          matInput
+          (paste)="onPaste($event)"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          (ngModelChange)="change($event)"
+          [required]="required"
+          [placeholder]="placeholder"
+          [(ngModel)]="text"
+          [disabled]="disabled"
+          [style.resize]="'none'"
+          [rows]="textAreaRow"
+          [maxlength]="maxlength ?? null"
+          [minlength]="minlength"
+          [readonly]="readonly"
+          [pattern]="pattern"
+          [formControl]="control"
+          (focusin)="inputBoxFocus(true)"
+          (focusout)="inputBoxFocus(false)"
+        >
+        </textarea>
+        <span *ngIf="suffixText" matSuffix>{{ suffixText }}</span>
+        <mat-hint *ngIf="maxlength && showCharCount" [align]="'end'"
+          >{{ text.length }} / {{ maxlength }}</mat-hint
+        >
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'number'">
+    <div fxLayout="column">
+      <mat-label
+        *ngIf="!achievementInput && !weighatgeEdit && !nolabel"
+        [matTooltip]="tooltipHint"
+        [matTooltipDisabled]="!tooltipHint"
+        [matTooltipPosition]="tooltipPosition"
+        class="input-label"
+        [ngClass]="
+          inFocus ? 'opened-input' : disabled || readonly ? 'disabled' : ''
+        "
+        >{{ label }}<span class="required" *ngIf="required">*</span></mat-label
+      >
+      <mat-form-field
+        class="rusdn-form-field date"
+        [class.suffixText]="suffixText"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <input
+          *ngIf="customScoreInput; else inputNumber"
+          (focusout)="onFocusOutEvent($event)"
+          (ngModelChange)="customScoreChange($event)"
+          (keydown)="checkLength($event)"
+          matInput
+          (paste)="onPaste($event)"
+          type="text"
+          [id]="_id"
+          [autocomplete]="autoCompleteRequired ? placeholder : 'turnoff'"
+          autocapitalize="off"
+          spellcheck="false"
+          [required]="required"
+          [placeholder]="placeholder"
+          [readonly]="readonly"
+          [(ngModel)]="text"
+          [min]="min"
+          [max]="max"
+          [maxlength]="maxlength ?? null"
+          [minlength]="minlength"
+          [pattern]="pattern"
+          [formControl]="control"
+          [attr.automationId]="automationId"
+          step="any"
+          (paste)="pasteNumber($event)"
+          (focusin)="inputBoxFocus(true)"
+          (focusout)="inputBoxFocus(false)"
+          appTwoDigitDecimal
+        />
+        <ng-template #inputNumber>
+          <input
+            (focusout)="onFocusOutEvent($event)"
+            (ngModelChange)="change($event)"
+            (keydown)="checkLength($event)"
+            matInput
+            (paste)="onPaste($event)"
+            type="number"
+            [id]="_id"
+            [autocomplete]="autoCompleteRequired ? placeholder : 'turnoff'"
+            autocapitalize="off"
+            spellcheck="false"
+            [required]="required"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [(ngModel)]="text"
+            [min]="min"
+            [max]="max ?? null"
+            [maxlength]="maxlength ?? null"
+            [minlength]="minlength"
+            [pattern]="pattern"
+            [formControl]="control"
+            [attr.automationId]="automationId"
+            step="any"
+            (keydown)="allowOnlyNumbers($event)"
+            (paste)="pasteNumber($event)"
+            (focusin)="inputBoxFocus(true)"
+            (focusout)="inputBoxFocus(false)"
+          />
+        </ng-template>
+        <mat-icon
+          matSuffix
+          *ngIf="suffixIcon && control.hasError('decimalPlacesExceeded')"
+          [style.color]="'#DF0101'"
+          [fontSet]="'icomoon'"
+          [fontIcon]="suffixIcon"
+          [matTooltip]="decimalError"
+          [matTooltipPosition]="'right'"
+        ></mat-icon>
+        <div
+          *ngIf="toggleButtonRight"
+          class="date-picker-icon date-picker-icon-right gray-background"
+        >
+          <label
+            *ngIf="defaultToggleButtonRight"
+            class="{{ toggleButtonRight }}"
+            >{{ toggleButtonRight }}</label
+          >
+          <ng-container *ngIf="!defaultToggleButtonRight">
+            <ng-content select="[custom-toggle-button-right]"></ng-content>
+          </ng-container>
+        </div>
+        <span *ngIf="prefixText" matPrefix>{{ prefixText }}</span>
+        <span *ngIf="suffixText" matSuffix>{{ suffixText }}</span>
+        <span
+          *ngIf="suffixInputGroupText"
+          class="suffixInputGroupClass"
+          matSuffix
+          >{{ suffixInputGroupText }}</span
+        >
+        <mat-hint *ngIf="maxlength && text && showCharCount" align="end"
+          >{{ text.toString().length }} / {{ maxlength }}</mat-hint
+        >
+        <mat-hint *ngIf="showEndDateHint">{{ showEndDateHint }} </mat-hint>
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'password'">
+    <div fxLayout="column">
+      <mat-label
+        class="input-label d-inline-flex"
+        [ngClass]="
+          inFocus ? 'opened-input' : disabled || readonly ? 'disabled' : ''
+        "
+        >{{ label }}<span class="required" *ngIf="required">*</span>
+        <span
+          *ngIf="infoText"
+          class="icomoon Info info-with-label"
+          [matTooltip]="infoText"
+          matTooltipPosition="above"
+        ></span
+      ></mat-label>
+      <mat-form-field
+        class="rusdn-form-field"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <input
+          (focusout)="onFocusOutEvent($event)"
+          (ngModelChange)="change($event)"
+          matInput
+          (paste)="onPaste($event)"
+          [type]="hide ? 'password' : 'text'"
+          [required]="required"
+          [placeholder]="placeholder"
+          [(ngModel)]="text"
+          [maxlength]="maxlength ?? null"
+          [readonly]="readonly"
+          [formControl]="control"
+          [attr.automationId]="automationId"
+          (focusin)="inputBoxFocus(true)"
+          (focusout)="inputBoxFocus(false)"
+        />
+        <mat-hint *ngIf="maxlength && showCharCount" [align]="'end'"
+          >{{ text.length }} / {{ maxlength }}</mat-hint
+        >
+        <span
+          class="text-label-container"
+          *ngIf="passwordToggle"
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide Password'"
+          [attr.aria-pressed]="hide"
+        >
+          <i
+            class="text-label icomoon"
+            [ngClass]="hide ? 'Eye-Ban-Outline' : 'eye'"
+            aria-hidden="true"
+          ></i>
+        </span>
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date'">
+    <div fxLayout="column">
+      <mat-form-field
+        class="rusdn-form-field date"
+        appearance="outline"
+        [color]="color"
+        [hideRequiredMarker]="hideRequiredMarker"
+        floatLabel="always"
+      >
+        <div
+          *ngIf="!toggleButtonRight"
+          class="date-picker-icon date-picker-icon-left pink-background"
+          (click)="picker.open()"
+        >
+          <label for="datePicker" class="icomoon field_date"></label>
+        </div>
+        <input
+          (focusout)="onFocusOutEvent($event)"
+          (ngModelChange)="change($event)"
+          matInput
+          (paste)="onPaste($event)"
+          (click)="picker.open()"
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="picker"
+          required="required"
+          [placeholder]="placeholder"
+          [disabled]="readonly"
+          [required]="required"
+          [(ngModel)]="text"
+          [formControl]="control"
+          [attr.automationId]="automationId"
+        />
+        <div
+          *ngIf="toggleButtonRight"
+          class="date-picker-icon date-picker-icon-right pink-background"
+          (click)="picker.open()"
+        >
+          <label for="datePicker" class="icomoon field_date"></label>
+        </div>
+        <mat-datepicker id="datePicker" #picker></mat-datepicker>
+        <mat-error *ngIf="control.invalid && control.touched">{{
+          getErrorMessage(control)
+        }}</mat-error>
+      </mat-form-field>
+      <mat-label class="input-label"
+        >{{ label }}<span class="required" *ngIf="required">*</span></mat-label
+      >
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'textDescription'">
+    <mat-form-field
+      class="rusdn-form-field"
+      [class.suffixText]="suffixText"
+      appearance="outline"
+      [color]="color"
+      [hideRequiredMarker]="hideRequiredMarker"
+      floatLabel="always"
+    >
+      <input
+        (focusout)="onFocusOutEvent($event)"
+        (ngModelChange)="change($event)"
+        (keydown)="_keyUp($event)"
+        matInput
+        (paste)="onPaste($event)"
+        type="text"
+        [id]="_id"
+        [autocomplete]="autoCompleteRequired ? placeholder : 'turnoff'"
+        [disabled]="disabled"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        [required]="required"
+        [readonly]="readonly"
+        [placeholder]="placeholder"
+        [pattern]="pattern"
+        [(ngModel)]="text"
+        [maxlength]="maxlength ?? null"
+        [minlength]="minlength"
+        [formControl]="control"
+        [attr.automationId]="automationId"
+      />
+      <mat-hint *ngIf="maxlength && showCharCount"
+        >{{ text.length }} / {{ maxlength }}</mat-hint
+      >
+      <mat-error *ngIf="control.invalid && control.touched">{{
+        getErrorMessage(control)
+      }}</mat-error>
+    </mat-form-field>
+  </ng-container>
+</div>

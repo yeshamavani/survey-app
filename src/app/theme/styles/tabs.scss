@@ -1,0 +1,34 @@
+@import './base/variable.scss';
+
+.mat-tab-group.mat-primary {
+  .mat-tab-header {
+    .mat-tab-list {
+      .mat-tab-label {
+        height: 45px;
+        opacity: 1;
+        min-width: auto;
+        padding: 0 16px;
+        .mat-tab-label-content {
+          font-size: 13px;
+          color: $light-68;
+        }
+        &.mat-tab-label-active {
+          .mat-tab-label-content {
+            color: $color-black !important;
+          }
+        }
+        &:not(.mat-tab-label-active):hover {
+          .mat-tab-label-content {
+            color: $my-app-accent-700;
+          }
+        }
+        &:not(.mat-tab-disabled):hover {
+          border: none !important;
+        }
+      }
+      .mat-ink-bar {
+        background-color: $purple-600 !important;
+      }
+    }
+  }
+}

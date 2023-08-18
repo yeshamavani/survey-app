@@ -1,0 +1,51 @@
+<mat-form-field
+  class="rusdn-form-field input-area cst-app-datepicker noPadding"
+  appearance="outline"
+>
+  <input
+    [id]="id"
+    [required]="required"
+    matInput
+    [matDatepicker]="picker"
+    [formControl]="control"
+    [value]="value"
+    (dateChange)="onDateChange($event)"
+    [disabled]="disabled"
+    [placeholder]="placeholder"
+    [min]="minDate"
+    [max]="maxDate"
+    (click)="picker.open()"
+    readonly
+  />
+  <div class="suffix-wrapper-picker" matSuffix>
+    <span class="date-picker-icons">
+      <mat-icon
+        *ngIf="control.value"
+        matDatepickerToggleIcon
+        class="icomoon close"
+        [ngClass]="disabled ? 'pointer-none' : ''"
+        (click)="clearDate()"
+      ></mat-icon>
+      <mat-datepicker-toggle [for]="picker"
+        ><mat-icon matDatepickerToggleIcon class="icomoon">
+          <img
+            [src]="
+              'assets/images/clm-images/smart-fields/calendar-outline.svg'
+                
+            "
+            alt=""
+          /> </mat-icon
+      ></mat-datepicker-toggle>
+    </span>
+
+  </div>
+  <mat-datepicker
+    (opened)="removeFocus()"
+    xPosition="end"
+    #picker
+    [disabled]="disabled"
+  ></mat-datepicker>
+</mat-form-field>
+<mat-error class="date-error-msg" *ngIf="control.invalid && control.touched">{{
+  control | datePickerError: validateArray:minDateErrorMessage
+}}</mat-error>

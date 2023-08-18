@@ -1,0 +1,120 @@
+// sonarignore:start
+@use "sass:math";
+// sonarignore:end
+@import './variable';
+@import './rex-styles';
+:root {
+  --font-size-regular: $body-font-size;
+}
+body {
+  font-size: var(--font-size-regular);
+}
+@function em($pixels) {
+  @return math.div($pixels, 13) * 1em;
+}
+@mixin flex-content($justify: center, $align: center, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+@mixin snack-background($bgcolor: #63b589, $brcolor: #3f9754, $color: white) {
+  padding: 1.231em;
+  color: $color;
+  background-color: $bgcolor;
+  border-color: $brcolor;
+  border-radius: 2px !important;
+  height: em(56);
+  text-align: center;
+  display: flex !important;
+}
+@mixin box-shadow-default($percent: 0.3, $blur: 24px) {
+  box-shadow: 0 0 $blur rgba(0, 0, 0, $percent);
+}
+@mixin fxFill {
+  display: flex;
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+}
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+}
+
+@mixin contract-clause-box {
+  .ck-editor[role='application']
+    .ck-editor__main[role='presentation']
+    .ck-content
+    .simple-box[datatype='Clauses'] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    .simple-box-number {
+      margin-bottom: 4px;
+      align-self: center;
+    }
+    h5.simple-box-title {
+      flex-grow: 1;
+      -webkit-user-select: unset !important;
+      -moz-user-select: unset !important;
+      -ms-user-select: unset !important;
+      user-select: unset !important;
+      pointer-events: unset !important;
+    }
+    .simple-box-description {
+      width: 100%;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  :root {
+    --font-size-regular: 12px;
+  }
+  @function em($pixels) {
+    @return ($pixels * 0.125) * 1em;
+  }
+}
+@media screen and (min-width: 601px) and (max-width: 800px) {
+  :root {
+    --font-size-regular: 13px;
+  }
+  @function em($pixels) {
+    @return math.div($pixels, 9) * 1em;
+  }
+}
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+  :root {
+    --font-size-regular: 10px;
+  }
+  @function em($pixels) {
+    @return ($pixels * 0.1) * 1em;
+  }
+}
+@media screen and (min-width: 1001px) and (max-width: 1180px) {
+  :root {
+    --font-size-regular: 11px;
+  }
+  @function em($pixels) {
+    @return math.div($pixels, 11) * 1em;
+  }
+}
+@media screen and (min-width: 1181px) and (max-width: 1300px) {
+  :root {
+    --font-size-regular: 12px;
+  }
+  @function em($pixels) {
+    @return math.div($pixels, 12) * 1em;
+  }
+}
+@media screen and (min-width: 1301px) {
+  :root {
+    --font-size-regular: 13px;
+  }
+  @function em($pixels) {
+    @return math.div($pixels, 9) * 1em;
+  }
+}

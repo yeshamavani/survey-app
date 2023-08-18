@@ -1,0 +1,51 @@
+@import '../../../../theme/styles/base/variable.scss';
+
+.q-grey-box {
+  padding: 16px;
+  background: $input-border;
+  border-radius: 4px;
+}
+.no-right-space {
+  padding-right: 0;
+  margin-right: 0;
+}
+.questions-drop-area {
+  flex: 1;
+  background-color: $color-white;
+}
+.questions-drop {
+  border: 1px dashed $border-color-dark;
+  background-color: $color-white;
+  min-height: 344px;
+  height: 100%;
+  border-radius: 4px;
+  .option-text {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: $text-color;
+    padding: 16px 32px;
+    max-width: 300px;
+  }
+  .icon {
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
+    margin-bottom: 16px !important;
+  }
+  p {
+    margin: 0 !important;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: pre-line;
+    text-align: center;
+    ::ng-deep .follow-up-icon {
+      max-width: 14px;
+      margin: 0 2px -3px;
+    }
+  }
+}

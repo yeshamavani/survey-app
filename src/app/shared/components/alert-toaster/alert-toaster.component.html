@@ -1,0 +1,21 @@
+<div class="sc-error" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon class="icomoon Warning-Outlined colour-red"></mat-icon>
+    <div class="first-text">{{ firstMsg }}</div>
+    <mat-divider class="content-header-divider" [vertical]="true"></mat-divider>
+
+    <div class="second-text">
+      GOTO
+      <span class="edit-purple" (click)="goTo.emit()">
+        {{ linkMsg }}</span
+      >{{ secondMsg }}
+    </div>
+  </div>
+  <div>
+    <mat-icon
+      class="icomoon close colour-red"
+      style="cursor: pointer"
+      (click)="close.emit()"
+    ></mat-icon>
+  </div>
+</div>

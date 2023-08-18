@@ -1,0 +1,51 @@
+<div class="copy-link-dialog dialog-main-wrapper">
+  <h2 fxLayout="row" fxLayoutAlign="space-between center" mat-dialog-title>
+    {{ dialogData.title }}
+    <span class="close-dialog">
+      <button
+        class="icomoon close cursor-pointer"
+        mat-button
+        mat-dialog-close
+      ></button>
+    </span>
+  </h2>
+  <div fxLayout="column" mat-dialog-content>
+    <input-text-box
+      class="copy-input-box"
+      type="text"
+      [(text)]="dialogData.link"
+      [label]="'LBL_LINK'"
+      [readonly]="true"
+      #fieldToCopy
+    ></input-text-box>
+  </div>
+  <div mat-dialog-actions>
+    <div
+      fxFlex="100"
+      fxLayoutAlign="end center"
+      class="dialog-actions"
+      fxLayoutGap="8px"
+    >
+      <button
+        mat-stroked-button
+        color="accent"
+        mat-stroked-button
+        mat-dialog-close
+        (click)="onClose()"
+      >
+        {{
+          dialogData.cancelTitle
+            ? dialogData.cancelTitle
+            : ('LBL_CANCEL')
+        }}
+      </button>
+      <button mat-raised-button color="accent" (click)="onConfirmation()">
+        {{
+          dialogData.confirmTitle
+            ? dialogData.confirmTitle
+            : ('LBL_COPY_LINK')
+        }}
+      </button>
+    </div>
+  </div>
+</div>

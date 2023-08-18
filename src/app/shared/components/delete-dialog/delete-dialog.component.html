@@ -1,0 +1,61 @@
+<div class="delete-dialog">
+  <h2 fxLayout="row" fxLayoutAlign="end center" mat-dialog-title>
+    <mat-icon mat-dialog-close class="icomoon close"></mat-icon>
+  </h2>
+  <div fxLayout="column" mat-dialog-content>
+    <div class="deleteIcon">
+      <mat-icon class="icomoon Delete-Outline"></mat-icon>
+    </div>
+    <mat-label id="dialog-msg" class="description-label">{{
+      data.dialogMsg
+    }}</mat-label>
+    <mat-label *ngIf="data.dialogNote" class="dialog-note">
+      {{ data.dialogNote }}</mat-label
+    >
+    <mat-label
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      [ngClass]="data.warningIcon ? 'warning-msg' : 'dialog-note'"
+      *ngIf="data.dialogWarning"
+    >
+      <strong *ngIf="!data.warningIcon">{{ 'LBL_NOTE' }}:</strong>
+      <!-- //no interpolation -->
+      <mat-icon
+        *ngIf="data.warningIcon"
+        class="icomoon Warning-Outlined"
+      ></mat-icon>
+      {{ data.dialogWarning }}
+    </mat-label>
+  </div>
+  <div mat-dialog-actions>
+    <div fxFlex="100" fxLayoutAlign="center center" class="dialog-actions">
+      <button
+        *ngIf="data.deleteLbl"
+        class="delete-btn"
+        mat-raised-button
+        color="accent"
+        mat-dialog-close
+        (click)="delete()"
+      >
+        {{ data.deleteLbl }}
+      </button>
+      <input-button
+        *ngIf="data.yesLabel"
+        type="stroked"
+        color="accent"
+        [value]="data.noLabel ?? ''"
+        (click)="close()"
+      >
+      </input-button>
+      <span *ngIf="data.yesLabel" [style.width]="'16px'"></span>
+      <input-button
+        *ngIf="data.yesLabel"
+        type="raised"
+        color="accent"
+        [value]="data.yesLabel"
+        (click)="delete()"
+      >
+      </input-button>
+    </div>
+  </div>
+</div>

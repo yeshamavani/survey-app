@@ -1,0 +1,12 @@
+@import '../../../theme/styles/base/variable.scss';
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-white;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+}

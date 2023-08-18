@@ -1,0 +1,137 @@
+<div>hi yesha inside q wrapper </div>
+<mat-drawer-container class="transparent-bg" [hasBackdrop]="false">
+  <mat-card
+    class="p-0 drop-area-main transparent-bg"
+    [ngClass]="buttonConfigurations.showHeader ? '' : 'no-questions-header'"
+  >
+    <ng-container *ngIf="buttonConfigurations.showHeader">
+      <div
+        class="card-hdr bg-white"
+        [ngClass]="hasMarginBorder ? 'hasBorder' : 'hasMargin'"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="0.5rem"
+      >
+        <div
+          class="card-title"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="0.5rem"
+        >
+          <!-- card header left html -->
+          <ng-container *ngIf="buttonConfigurations?.leftSection">
+            <mat-icon
+              *ngIf="buttonConfigurations.leftSection?.matIconClass"
+              class="icomoon"
+              [ngClass]="buttonConfigurations.leftSection?.matIconClass"
+            ></mat-icon>
+            <label
+              class="ellipsis"
+              [ngClass]="buttonConfigurations.leftSection?.labelClass ?? ''"
+              [matTooltip]="buttonConfigurations.leftSection?.label ?? ''"
+              matTooltipClass="word-break"
+            >
+              {{ buttonConfigurations.leftSection?.label }}</label
+            >
+          </ng-container>
+          <ng-container
+            *ngIf="!buttonConfigurations?.leftSection && isWeightsEnabled"
+          >
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <circle-progress
+                class="progress-process"
+                [matTooltipDisabled]="currentTotalWeight <= 100"
+                [matTooltip]="'Total Weightage cannot be more than 100'"
+                [percent]="currentTotalWeight"
+                [title]="
+                  (currentTotalWeight === 100
+                    ? 100
+                    : (currentTotalWeight | number : '1.2-2')) + '%'
+                "
+                [radius]="20"
+                [outerStrokeWidth]="3"
+                [innerStrokeWidth]="3"
+                [space]="-4"
+                [outerStrokeColor]="currentTotalWeight | progressColor"
+                innerStrokeColor="#e8e8e8"
+                [showUnits]="false"
+                [showSubtitle]="false"
+                [showTitle]="true"
+                titleFontSize="10"
+                titleColor="#000000"
+                [animation]="false"
+                [animationDuration]="300"
+              ></circle-progress>
+              <label class="total-weight-text">{{
+                "Total weight assigned to all the questions"
+              }}</label>
+            </div>
+          </ng-container>
+        </div>
+
+        <div
+          class="card-hdr-right"
+          fxLayout="row"
+          fxLayoutAlign="end center"
+          fxLayoutGap="1rem"
+        >
+          <!-- card header right data -->
+          <ng-container *ngIf="buttonConfigurations?.newQuestion">
+            <button
+              class="color-tertiary cst-menu"
+              mat-button
+              [matMenuTriggerFor]="newQuestion"
+              [ngClass]="t.menuOpen ? 'active' : 'inActive'"
+              #t="matMenuTrigger"
+              [disabled]="buttonConfigurations.newQuestion?.isDisabled"
+            >
+              <mat-icon class="icomoon plus_small"></mat-icon>
+              <label>{{ buttonConfigurations.newQuestion?.buttonLabel }}</label>
+              <mat-icon class="icomoon Chevron-Down"></mat-icon>
+            </button>
+            <mat-menu
+              #newQuestion="matMenu"
+              xPosition="before"
+              class="mat-toolbar-menu"
+            >
+              <button
+                mat-menu-item
+                *ngFor="
+                  let option of buttonConfigurations?.newQuestion?.options
+                "
+                (click)="
+                  buttonConfigurations?.newQuestion?.callback(option.value)
+                "
+              >
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="8px"
+                >
+                  <mat-icon class="icomoon">
+                    <img [src]="option.src" alt="" />
+                  </mat-icon>
+                  <div>{{ option.displayValue }}</div>
+                </div>
+              </button>
+            </mat-menu>
+            <mat-divider
+              class="vertical-divider"
+              [vertical]="true"
+            ></mat-divider>
+          </ng-container>
+          <ng-container *ngIf="buttonConfigurations.showWeightSlider">
+            <mat-slide-toggle
+              class="cst-mat-slide-toggle"
+              color="accent"
+              [checked]="isWeightsEnabled"
+              (change)="enableWeights()"
+              >Enable Weights</mat-slide-toggle
+            >
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    <ng-content></ng-content>
+  </mat-card>
+</mat-drawer-container>

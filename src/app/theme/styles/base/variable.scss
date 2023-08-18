@@ -1,0 +1,174 @@
+// sonarignore:start
+@use '@angular/material' as mat;
+// sonarignore:end
+@import 'palette.scss';
+@import 'rex-styles.scss';
+
+$my-app-primary: mat.define-palette($red, 500, 900);
+$my-app-accent: mat.define-palette($gray, 500, 900);
+$my-app-warn: mat.define-palette($warn, 500, 900, A100);
+
+$my-app-primary-50: mat.get-color-from-palette(
+  $my-app-primary,
+  50
+); //red-50=#FFE8E8
+$my-app-primary-100: mat.get-color-from-palette(
+  $my-app-primary,
+  100
+); //red-100=#ffd3d3
+$my-app-primary-200: mat.get-color-from-palette(
+  $my-app-primary,
+  200
+); //red-200=#fb9a9a
+$my-app-primary-300: mat.get-color-from-palette(
+  $my-app-primary,
+  300
+); //red-300=#f76b6b
+$my-app-primary-400: mat.get-color-from-palette(
+  $my-app-primary,
+  400
+); //red-400=#f53a3a
+$my-app-primary-500: mat.get-color-from-palette(
+  $my-app-primary,
+  500
+); //red-500=#ec0606
+$my-app-primary-600: mat.get-color-from-palette(
+  $my-app-primary,
+  600
+); //red-600=#d80000
+$my-app-primary-700: mat.get-color-from-palette(
+  $my-app-primary,
+  700
+); //red-700=#bf0000
+$my-app-primary-800: mat.get-color-from-palette(
+  $my-app-primary,
+  800
+); //red-800=#8C0000
+$my-app-accent-50: mat.get-color-from-palette(
+  $my-app-accent,
+  50
+); //gray-50=#f7f7f7
+$my-app-accent-100: mat.get-color-from-palette(
+  $my-app-accent,
+  100
+); //gray-100=#ebebeb
+$my-app-accent-200: mat.get-color-from-palette(
+  $my-app-accent,
+  200
+); //gray-200=#D1D1D1
+$my-app-accent-300: mat.get-color-from-palette(
+  $my-app-accent,
+  300
+); //gray-300=#b6b6b6
+$my-app-accent-400: mat.get-color-from-palette(
+  $my-app-accent,
+  400
+); //gray-400=#9c9c9c
+$my-app-accent-500: mat.get-color-from-palette(
+  $my-app-accent,
+  500
+); //gray-500=#828282
+$my-app-accent-600: mat.get-color-from-palette(
+  $my-app-accent,
+  600
+); //gray-600=#686868
+$my-app-accent-700: mat.get-color-from-palette(
+  $my-app-accent,
+  700
+); //gray-700=#4D4D4D
+$my-app-accent-800: mat.get-color-from-palette(
+  $my-app-accent,
+  800
+); //gray-800=#333333
+$my-app-accent-900: mat.get-color-from-palette(
+  $my-app-accent,
+  900
+); //gray-900=#000000
+
+$rakuten-font: 'Rakuten Sans UI', sans-serif;
+$icon-moon: 'icomoon', Serif, Sans-serif !important;
+$color-primary: $my-app-primary-800;
+$color-hover: $my-app-primary-800;
+$gray-50: $my-app-accent-50;
+$color-green: #00b900;
+
+$crimson-red: $my-app-primary-700;
+$scroll-color: $my-app-accent-200;
+$scroll-hover-color: $my-app-accent-900;
+$text-color: $my-app-accent-800;
+$light-border-color: #dddddd;
+$light-68: $my-app-accent-600;
+$light-text: $my-app-accent-400;
+$purple-700: #7d00be;
+$purple-600: #9b00ec;
+$purple-300: #d78bff;
+$purple-50: #f7e7ff;
+$selected-bg-color: $my-app-primary-50;
+$orange-100: map-get($rex-colors, 'orange-100'); //#ffefd6
+$rose-50: #ffcfdb;
+$grey-br: #d1d5db;
+$drawer-bg: #f5f5f5;
+
+/* Toaster coolors */
+$alert-success-bg: #ebf7ec;
+$alert-success-font: #047205;
+$alert-info-bg: #ebf7fe;
+$alert-info-font: #006497;
+$alert-error-bg: #fff0f0;
+$alert-error-font: #df0101;
+$alert-warning-bg: #fef0dd;
+$alert-warning-font: #a35e04;
+$alert-warning-text: #7d6e00;
+$alert-warning-background: #fff4d2;
+
+/* Warning colors */
+$color-warning: #ff9800;
+$error-color: #e61717;
+$ng-select-error: #ff5722;
+
+$rubik-font: 'Rubik', sans-serif;
+$color-white: #ffffff;
+$color-black: #000000;
+$input-border: #f2f2f2;
+
+$input-label-color: #606060;
+$btn-disable-border: #e8e8e8;
+$btn-disable-text: #898989;
+$light-grey: #dadada;
+$box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.3);
+$border-color: #ebebeb;
+$border-color-dark: #d1d1d1;
+$activity-log-color-blue: #61aed3;
+$activity-log-color-yellow: #ffae00;
+$pencil-icon: #9e9a9e;
+
+$body-font: $rakuten-font;
+$body-font-size: 13px;
+$body-font-weight: 400;
+$font-sm: 14px;
+$font-md: 16px;
+$font-xs: 12px;
+$normal-padding: 16px;
+$margin: 16px;
+$icon-size-md: 24px;
+$icon-size-sm: 20px;
+
+$edit-label-color: #f59600;
+$edit-label-bg-color: #ffebcb;
+
+$delete-label-bg-color: #fd585f21;
+$change-label-bg-color: #ffe6be;
+
+//doc type colors
+$mpa: #21b400;
+$nda: #00b4e5;
+$msa: #8c61d3;
+$mla: #f76b6b;
+$sow: #f59600;
+
+$applied-filter-height: 42px;
+$has-comment-color: #fef7a9;
+$has-comment-active-color: #fdf05d;
+
+// random colors
+$initials-blue: #008cff;

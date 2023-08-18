@@ -1,0 +1,138 @@
+<div class="add-edit-question">
+  <div
+    class="hdr-main"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap="1rem"
+  >
+    <div
+      class="title-col"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      fxFlex="440px"
+    >
+      <ng-template #questionName>
+        <ng-container
+          *ngIf="questions?.length && questions?.[0]?.name; else untitled"
+        >
+          <div class="title ellipsis mw-100" [matTooltip]="questions[0].name">
+            {{ questions[0].name }}
+          </div>
+        </ng-container>
+        <ng-template #untitled
+          ><div class="title ellipsis w-100" [innerHTML]="questions[0].name">
+            Untitled
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+    <div
+      class="rt-btns"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      fxLayoutGap="1rem"
+      fxFlex
+    >
+      <input-button
+        type="raised"
+        color="accent"
+        [value]="submitButtonLabel"
+        [disabled]="!questions.length"
+        [matTooltip]="
+          !questions.length
+            ? lblAddOneQuestion
+            : 'Question created successfully.'
+        "
+        (clickButton)="submit()"
+      >
+      </input-button>
+      <input-button
+        type="raised"
+        color="accent"
+        [value]="closeButtonLabel"
+        [matTooltip]="lblSaveQuestionAsDraft"
+        (clickButton)="close()"
+      >
+      </input-button>
+    </div>
+  </div>
+  <mat-drawer-container class="drawer-container" autosize>
+    <div
+      class="q-main-content"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxLayoutGap="1rem"
+      cdkDropListGroup
+    >
+      <!-- left section with question layout -->
+      <div>loading q layout </div>
+      <app-question-layout-section></app-question-layout-section>
+      <div></div>
+      <div class="right-section" fxFlex>
+        <ng-container *ngIf="!isQuestionLoading; else loader">
+          <app-questions-wrapper
+            *ngIf="questions.length; else noQquestions"
+            [hasMarginBorder]="false"
+            [buttonConfigurations]="buttonConfigurations"
+          >
+            <div class="questions-card-main">
+              <div
+                class="question-card q-grey-box"
+                *ngFor="let question of questions; let i = index"
+              >
+                <!-- single question with all its follow up start -->
+                <mat-accordion
+                  class="questions-accordion"
+                  [multi]="true"
+                  [id]="scrollId + (i + 1)"
+                >
+                  <app-question-card
+                    [question]="question"
+                    [questionCount]="questions.length"
+                    [missingFieldError]="questionMissingFieldsError[i]"
+                    [highlightQuestion]="
+                      questionMissingFieldsError[i] ? true : false
+                    "
+                    [depth]="depth"
+                    [order]="i + 1"
+                    [mode]="mode.EDIT"
+                    [showDelete]="true"
+                    [showDuplicate]="false"
+                  ></app-question-card>
+                </mat-accordion>
+                <!-- single question with all its follow up end -->
+              </div>
+            </div>
+          </app-questions-wrapper>
+          <!-- No question added placeholder -->
+          <ng-template #noQquestions>
+            <div class="drop-area">
+              <app-no-question-added
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+                id="question-drop-area"
+                cdkDropListConnectedTo="question-type-drag-area"
+              ></app-no-question-added>
+            </div>
+          </ng-template>
+        </ng-container>
+        <ng-template #loader>
+          <div class="loading-questions">
+            <mat-spinner
+              color="primary"
+              mode="indeterminate"
+              [diameter]="50"
+            ></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <mat-drawer #drawer class="question-sidenav" mode="side" position="end">
+      <!-- question setting section -->
+      <app-question-setting-section
+        (closeDrawer)="closeDrawer()"
+      ></app-question-setting-section>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

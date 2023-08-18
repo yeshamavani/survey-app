@@ -1,0 +1,110 @@
+@import '../../../theme/styles/base/variable.scss';
+
+.name-label {
+  font-family: $rakuten-font;
+  font-size: 12px;
+  line-height: 16px;
+  color: $input-label-color;
+  margin-left: 0.92307692em;
+}
+
+.description-label {
+  font-family: $rakuten-font;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  color: $text-color;
+  text-align: center;
+  margin: 0 !important;
+  max-width: 360px;
+}
+.dialog-note {
+  font-family: $rakuten-font;
+  font-style: normal;
+  font-size: 12px;
+  margin: 4px auto;
+  color: $text-color;
+  text-align: center;
+  font-weight: 400;
+}
+
+.warning-msg {
+  @extend .description-label;
+  max-width: 340px;
+  padding: 24px 0 16px;
+  color: $color-black;
+
+  .mat-icon {
+    margin-right: 8px;
+    color: $alert-error-font;
+    height: 16px;
+    width: 16px;
+    font-size: 15px;
+    margin-top: 2px;
+  }
+  .msg {
+    font-size: 13px;
+  }
+}
+
+.cancel-btn:hover {
+  &.hover {
+    color: $input-label-color !important;
+  }
+}
+.delete-dialog {
+  .mat-dialog-title {
+    font-family: $rakuten-font;
+    padding: 12px 16px;
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: $text-color;
+    border-bottom: 0 none;
+    .close {
+      cursor: pointer;
+      color: #9c9c9c;
+    }
+  }
+  ::ng-deep .mat-dialog-content {
+    display: block;
+    margin: 0;
+    padding: 0 16px;
+    align-items: center;
+
+    .deleteIcon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      margin: 0 auto 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #f2f2f2;
+      color: #606060;
+      font-size: 22px;
+    }
+  }
+
+  ::ng-deep .mat-dialog-actions {
+    font-family: $rakuten-font;
+    padding: 24px 1rem;
+    margin-bottom: 0;
+    border-top: 0 none;
+
+    .delete-btn {
+      height: 40px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden !important;
+  padding: 0;
+}

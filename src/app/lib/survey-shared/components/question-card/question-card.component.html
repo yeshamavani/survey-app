@@ -1,0 +1,500 @@
+<mat-expansion-panel
+  [class.mat-elevation-z0]="true"
+  [expanded]="question.isExpanded"
+  [ngClass]="{
+    'follow-up-questions': question.parentQuestionId,
+    'focus-question': isQuestionFocused,
+    'highlight-question': highlightQuestion,
+    'drag-handler': enableQuestionsDragging,
+    'response-question':
+      mode === modeEnum.RESPONSE || mode === modeEnum.RESPONSE_VIEW
+  }"
+  class="question-card-wrapper"
+  (click)="questionSelected()"
+  cdkDropList
+  (cdkDropListDropped)="dropOnQuestion()"
+  [id]="question.id"
+>
+  <mat-expansion-panel-header>
+    <div
+      class="panel-top"
+      fxLayout="row"
+      fxFlex="0 0 100%"
+      fxLayoutAlign="space-between center"
+      (click)="$event.stopPropagation()"
+      *ngIf="showQuestionTopHeader"
+    >
+      <div
+        class="panel-lhs"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="8px"
+      >
+        <button
+          mat-icon-button
+          class="expansion-arrow toggle-panel"
+          *ngIf="question?.parentQuestionId"
+        >
+          <mat-icon
+            [ngClass]="{
+              icomoon: true,
+              arrow_down: !question.isExpanded,
+              arrow_up: question.isExpanded
+            }"
+            (click)="$event.stopPropagation(); toggleExpansion()"
+          >
+          </mat-icon>
+        </button>
+        <div class="panel-title" *ngIf="!question.parentQuestionId">
+          <mat-icon
+            *ngIf="missingFieldError"
+            class="icomoon Warning-Outlined"
+            [matTooltip]="missingFieldError"
+            matTooltipClass="tooltip-below word-break"
+          ></mat-icon>
+          <div class="drag-question" *ngIf="enableQuestionsDragging">
+            <mat-icon class="icomoon dot rotate-90 dragHandle"></mat-icon>
+          </div>
+          <ng-container *ngIf="displayQuestionCountWithTotal; else questionCap">
+            {{ displayOrderString }}
+          </ng-container>
+          <ng-template #questionCap>
+            {{ !hideQuestionCount ? questionDisplayText : "Question" }}
+          </ng-template>
+        </div>
+        <div
+          class="weightage-panel"
+          fxLayout="row"
+          *ngIf="showQuestionWeightage && editWeightage"
+        >
+          <mat-divider class="v-divider" [vertical]="true"></mat-divider>
+          <div class="weightage" fxLayout="row" fxLayoutAlign="start center">
+            <div class="text-label">Weightage:</div>
+            <div
+              class="weightage-input"
+              *ngIf="question?.isScoreEnabled; else disabledWeightage"
+              (keydown.enter)="$event.stopImmediatePropagation()"
+            >
+              <input-text-box
+                suffixText="/ 100"
+                [decimals]="true"
+                [uptoDecimalPlace]="2"
+                type="number"
+                [noPadding]="true"
+                [weighatgeEdit]="true"
+                [max]="100"
+                [customErrorMessage]="
+                  weightageForm.get('value')?.value > 100
+                    ? 'Enter number less than or equal to 100.'
+                    : null
+                "
+                [text]="weightageForm.get('value')?.value"
+                [control]="weightageForm.get('value')"
+                (focusOut)="weightInputFocusOut()"
+              >
+              </input-text-box>
+            </div>
+            <ng-template #disabledWeightage>
+              <div
+                class="disabled-none-weightage"
+                [matTooltip]="
+                  'You can not assign weights for question that does not have scores'
+                "
+                matTooltipPosition="above"
+                matTooltipClass="word-break"
+              >
+                None
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <ng-container *ngIf="mode === modeEnum.EDIT; else viewFollowUpOption">
+          <ng-container
+            *ngIf="
+              question?.parentQuestionId &&
+              (parentQuestionData?.questionType === questionsType.TEXT ||
+                parentQuestionData?.questionType === questionsType.SCALE)
+            "
+          >
+            <label class="ellipsis mw-200">{{
+              parentQuestionData?.name
+            }}</label>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              question?.parentQuestionId &&
+              parentQuestionData?.questionType !== questionsType.TEXT &&
+              parentQuestionData?.questionType !== questionsType.SCALE
+            "
+          >
+            <button
+              class="cst-menu"
+              mat-button
+              [matMenuTriggerFor]="newQuestion"
+              [matTooltip]="question.followUpOption?.name ?? ''"
+              [ngClass]="t.menuOpen ? 'active' : 'inActive'"
+              (click)="$event.stopPropagation()"
+              #t="matMenuTrigger"
+            >
+              <label>{{ question.followUpOption?.name }}</label>
+              <mat-icon class="icomoon tri-Down"></mat-icon>
+            </button>
+            <mat-menu
+              #newQuestion="matMenu"
+              xPosition="before"
+              class="mat-toolbar-menu"
+            >
+              <button
+                mat-menu-item
+                [matTooltip]="option.name ?? ''"
+                *ngFor="let option of parentQuestionData?.options"
+                [disabled]="!!option.followupQuestionId"
+                (click)="followUpOptionChange(option)"
+              >
+                <div class="ellipsis w-100">{{ option.name }}</div>
+              </button>
+            </mat-menu>
+          </ng-container>
+        </ng-container>
+        <ng-template #viewFollowUpOption>
+          <label
+            class="ellipsis mw-200"
+            [matTooltip]="
+              (question.parentQuestionId &&
+              (parentQuestionData.questionType === questionsType.TEXT ||
+                parentQuestionData.questionType === questionsType.SCALE)
+                ? parentQuestionData.name
+                : question.followUpOption?.name) ?? ''
+            "
+            matTooltipClass="word-break"
+            >{{
+              question.parentQuestionId &&
+              (parentQuestionData.questionType === questionsType.TEXT ||
+                parentQuestionData.questionType === questionsType.SCALE)
+                ? parentQuestionData.name
+                : question.followUpOption?.name
+            }}</label
+          >
+        </ng-template>
+      </div>
+      <div
+        class="panel-rhs"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="8px"
+      >
+        <div
+          class="weightage"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="4.5px"
+          (click)="$event.stopPropagation()"
+          *ngIf="showWeightageWithRootQuestion && showQuestionWeightage"
+        >
+          <span>Weightage: {{ rootQuestionWeight }}</span>
+        </div>
+        <div
+          class="children-count"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="4.5px"
+          (click)="$event.stopPropagation()"
+          *ngIf="childrenCount > 0"
+        >
+          <mat-icon class="icomoon Workflow"> </mat-icon>
+          <span>{{ childrenCount | targetStringLength : 2 }}</span>
+        </div>
+        <div
+          *ngIf="question.status === questionStatus.ADDED_TO_SURVEY"
+          class="new-question-label children-count width-auto"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="4.5px"
+          (click)="$event.stopPropagation()"
+        >
+          <img
+            [src]="'assets/images/clm-images/survey/new-question.svg'"
+            [alt]="'New Question'"
+          />
+          <span>New Question</span>
+        </div>
+        <ng-container
+          *ngIf="
+            mode === modeEnum.EDIT &&
+              !question.parentQuestionId &&
+              showDuplicate &&
+              showDelete;
+            else showDeleteOnly
+          "
+        >
+          <button
+            mat-icon-button
+            class="option-btn contract-details-tour-step10"
+            [matMenuTriggerFor]="optionMenu"
+            #menuTriggerQuestions="matMenuTrigger"
+          >
+            <mat-icon class="icomoon Vertical-Dots"></mat-icon>
+          </button>
+          <mat-menu #optionMenu="matMenu" class="option-menu">
+            <button
+              mat-menu-item
+              [matTooltip]="'Delete'"
+              (click)="menuTriggerQuestions.closeMenu(); deleteQuestions()"
+            >
+              <mat-icon class="icomoon Delete-Outline"> </mat-icon>
+              <span> Delete</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="menuTriggerQuestions.closeMenu(); duplicateQuestion()"
+            >
+              <mat-icon class="icomoon">
+                <img
+                  [src]="'assets/images/clm-images/scorecard/copy-gray.svg'"
+                  [alt]="'Duplicate'"
+              /></mat-icon>
+              <span>Duplicate</span>
+            </button>
+          </mat-menu>
+        </ng-container>
+        <ng-template #showDeleteOnly>
+          <button
+            mat-icon-button
+            [matTooltip]="'Delete'"
+            (click)="$event.stopPropagation(); deleteQuestions()"
+            *ngIf="
+              showDelete &&
+              (mode === modeEnum.EDIT ||
+                (hasCustomDelete && !question.parentQuestionId))
+            "
+          >
+            <mat-icon class="icomoon Delete-Outline"> </mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+    <div
+      class="dependent-question"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      (click)="$event.stopPropagation()"
+      *ngIf="
+        dependentOnQuestion &&
+        mode !== modeEnum.RESPONSE &&
+        mode !== modeEnum.RESPONSE_VIEW
+      "
+      matTooltipPosition="above"
+      matTooltipClass="word-break"
+      [matTooltip]="dependentOnQuestion.name"
+    >
+      <mat-icon class="icomoon Chevron-Up"></mat-icon>
+      <span>Question {{ dependentQuestionNumber }}</span>
+    </div>
+    <div
+      class="panel-bottom"
+      (click)="$event.stopPropagation()"
+      (keydown.Space)="$event.stopImmediatePropagation()"
+      (keydown.enter)="$event.stopImmediatePropagation()"
+    >
+      <div (click)="$event.stopPropagation()">
+        <ng-container *ngIf="mode === modeEnum.EDIT; else viewTitle">
+          <textarea
+            (click)="questionSelected()"
+            class="question-title-input w-100"
+            type="area"
+            name="value"
+            [placeholder]="'Add your Question here...'"
+            [maxlength]="questionTitleMaxLength"
+            [minlength]="questionTitleMinLength"
+            [value]="modalForm.get('name')?.value"
+            [formControl]="modalForm.get('name')"
+            (focusout)="focusOutQuestionTitle()"
+            (focusin)="focusInQuestionTitle()"
+          ></textarea>
+          <mat-error
+            class="editor-error"
+            *ngIf="modalForm.get('name').invalid && modalForm.get('name').dirty"
+          >
+            <span *ngIf="modalForm.get('name').errors.minlength"
+              >{{ minLengthErrorText }}
+            </span>
+            <span *ngIf="modalForm.get('name').errors.maxlength"
+              >{{ maxLengthErrorText }}
+            </span>
+          </mat-error>
+        </ng-container>
+        <ng-template #viewTitle>
+          <ng-container
+            *ngIf="
+              mode === modeEnum.RESPONSE || mode === modeEnum.RESPONSE_VIEW;
+              else titleOnly
+            "
+          >
+            <div
+              class="response-followup-text"
+              *ngIf="question.parentQuestionId"
+              fxLayout="row"
+            >
+              <mat-icon class="info-icon icomoon Info-Outline"></mat-icon>
+              <span [innerHTML]="infoMessage"></span>
+            </div>
+            <div fxLayout="row">
+              <div *ngIf="orderOfSectionsQuestion" class="question-count">
+                {{ orderOfSectionsQuestion }}.
+              </div>
+              <div
+                class="question-title"
+                [innerHTML]="question.name || 'Untitled'"
+              ></div>
+              <div *ngIf="isMandatory === true">
+                <sup class="mandatory-mark">*</sup>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #titleOnly>
+            <div class="question-title">
+              {{ question.name || "Untitled" }}
+            </div>
+          </ng-template>
+        </ng-template>
+      </div>
+      <label *ngIf="showQuestionType" for="fname">{{
+        question.questionType
+      }}</label>
+    </div>
+  </mat-expansion-panel-header>
+  <!-- <ng-container [ngSwitch]="question.questionType">
+    <app-question-answer
+      [question]="question"
+      [optionsArray]="optionsArray"
+      [mode]="mode"
+      (recalculateChildrenCount)="recalculateChildrenCountFn()"
+      (followUpToggledEvent)="followUpToggle($event)"
+      (surveyResponse)="surveyResponseResult($event)"
+    ></app-question-answer>
+  </ng-container> -->
+  <div
+    class="show-error-msg"
+    *ngIf="mode === modeEnum.RESPONSE && isMandatory && highlightQuestion"
+    fxLayout="row"
+  >
+    <mat-icon class="icomoon Warning-Outlined"></mat-icon>
+    <span>This is Required Question</span>
+  </div>
+</mat-expansion-panel>
+<ng-container
+  *ngIf="
+    !question?.followUpQuestions?.length &&
+    question?.isFollowupEnabled &&
+    mode === modeEnum.EDIT
+  "
+>
+  <ng-container
+    *ngIf="
+      question.questionType === questionsType.TEXT ||
+        question.questionType === questionsType.SCALE;
+      else otherQuestion
+    "
+  >
+    <app-question-drop-section
+      cdkDropList
+      (cdkDropListDropped)="dropFollowUp($event)"
+      [titleText]="'Drag and Drop'"
+      [subTitleText]="'Select the Layout Element from the left pane.'"
+      [showWrapper]="false"
+      [showLayoutOptionsForFollowUp]="showLayoutOptionsForFollowUp"
+      (followUpLayout)="setFollowUpLayout($event)"
+    ></app-question-drop-section>
+  </ng-container>
+  <ng-template #otherQuestion>
+    <ng-container *ngIf="!(question.options | checkAnyOptionsHasDroppable)">
+      <!-- Enable Follow Up But No FollowUp Added -->
+      <app-question-drop-section
+        class="has-connection"
+        [titleText]="'No Follow Up Questions Available'"
+        [subTitleText]="followUpIcon"
+        img="assets/images/clm-images/no-data-found/no-data-found.svg"
+        [showWrapper]="false"
+      ></app-question-drop-section>
+    </ng-container>
+  </ng-template>
+</ng-container>
+
+<!-- follow up questions mat-expansion -->
+<ng-container *ngIf="question.followUpQuestions?.length && question.isExpanded">
+  <ng-container
+    *ngIf="
+      mode === modeEnum.RESPONSE || mode === modeEnum.RESPONSE_VIEW;
+      else showChildWithFollowups
+    "
+  >
+    <div class="flat-child-question">
+      <ng-container *ngFor="let followupQuestion of question.followUpQuestions">
+        <app-question-card
+          *ngIf="question | showFollowup : followupQuestion : questionResponse"
+          [question]="followupQuestion"
+          [depth]="depth + 1"
+          [mode]="mode"
+          [displayQuestionCountWithTotal]="false"
+          [selectAndFocusQuestion]="false"
+          [showQuestionTopHeader]="false"
+          [isMandatory]="isMandatory"
+          [showQuestionType]="false"
+          [highlightQuestion]="showErrorMsg"
+          (surveyResponse)="surveyResponseResult($event)"
+        ></app-question-card>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-template #showChildWithFollowups>
+    <div
+      class="child-question"
+      [ngClass]="
+        question?.isFollowupEnabled &&
+        (question.options | checkAnyOptionsHasDroppable) &&
+        mode === modeEnum.EDIT
+          ? 'followup-elm-parallel'
+          : ''
+      "
+    >
+      <app-question-card
+        class="follow-up"
+        *ngFor="let followupQuestion of question.followUpQuestions"
+        [showErrorOnAddingQuestionOnOptions]="
+          showErrorOnAddingQuestionOnOptions
+        "
+        [question]="followupQuestion"
+        [depth]="depth + 1"
+        [mode]="mode"
+        (clickEvent)="setQuestionPageOnFocus()"
+        (recalculateChildrenCount)="recalculateChildrenCountFn()"
+      ></app-question-card>
+    </div>
+  </ng-template>
+</ng-container>
+
+<!-- Enable Follow Up And Option slected to add followUp -->
+<ng-container
+  *ngIf="
+    question?.isFollowupEnabled &&
+    (question.options | checkAnyOptionsHasDroppable) &&
+    mode === modeEnum.EDIT
+  "
+>
+  <ng-container *ngFor="let option of question.options">
+    <app-question-drop-section
+      class="has-connection"
+      *ngIf="option?.showDroppable"
+      cdkDropList
+      (cdkDropListDropped)="dropFollowUp($event, option)"
+      [buttonText]="option?.name"
+      [showButton]="true"
+      (cancelEvent)="cancelFollowUp(option)"
+      [titleText]="'Drag and Drop'"
+      [subTitleText]="'Select the Layout Element from the left pane.'"
+      [showWrapper]="false"
+      [showLayoutOptionsForFollowUp]="showLayoutOptionsForFollowUp"
+      (followUpLayout)="setFollowUpLayout($event, option)"
+    ></app-question-drop-section
+  ></ng-container>
+</ng-container>

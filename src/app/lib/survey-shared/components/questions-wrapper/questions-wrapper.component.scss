@@ -1,0 +1,122 @@
+@import '../../../../theme/styles/base/variable.scss';
+
+:host {
+  width: 100%;
+}
+.transparent-bg {
+  background-color: transparent !important;
+}
+.drop-area-main {
+  .card-hdr {
+    padding: 7px 16px;
+    height: 50px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    &.hasMargin {
+      margin-bottom: 16px;
+    }
+    &.hasBorder {
+      border-bottom: 1px solid $input-border;
+    }
+    .card-title {
+      label {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 18px;
+      }
+      .total-weight-number {
+        margin-right: 12px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        border: 5px solid $purple-700;
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 14px;
+        color: $purple-600;
+      }
+    }
+    .card-hdr-right {
+      .cst-menu {
+        padding: 5px 9px;
+        height: 24px;
+        line-height: normal;
+        &.active {
+          background-color: $purple-50;
+        }
+        .mat-icon {
+          font-size: 18px;
+          height: auto;
+        }
+        &.mat-button-disabled {
+          background-color: transparent !important;
+        }
+      }
+      .cst-mat-slide-toggle {
+        margin-top: 0;
+      }
+    }
+  }
+  &.no-questions-header {
+    ::ng-deep .questions-card-main {
+      height: calc(100vh - 136px);
+      .q-grey-box {
+        margin: 8px 8px 12px;
+      }
+    }
+  }
+}
+.page-select {
+  width: 50px;
+  height: 27px;
+  ::ng-deep .rusdn-form-field.noPadding {
+    .mat-form-field-wrapper {
+      margin: 0;
+      .mat-form-field-flex {
+        padding: 0 10px;
+        min-height: 27px;
+        .mat-form-field-infix {
+          padding: 6px 0 2px !important;
+          .mat-select .mat-select-arrow {
+            margin: 2px 0 0;
+          }
+        }
+      }
+    }
+  }
+}
+.page-nav {
+  height: 18px;
+  width: 18px;
+  ::ng-deep .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    .mat-icon {
+      height: auto;
+      width: auto;
+      font-size: 16px;
+      line-height: normal;
+    }
+  }
+}
+
+.m-d-activity-n-filter {
+  min-width: 440px;
+  ::ng-deep .filter-header {
+    padding: 11.5px 16px;
+  }
+  ::ng-deep .field-container {
+    max-height: calc(100vh - 102px) !important;
+  }
+  .no-data-container {
+    max-height: calc(100vh - 102px) !important;
+  }
+}
+
+.fixed-drawer {
+  min-height: calc(100vh - 53px);
+}

@@ -1,0 +1,106 @@
+@import '../../../styles/base/variable.scss';
+
+.date-picker {
+  width: 100%;
+}
+.diplay-as-button {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.datepicker-readonly {
+  ::ng-deep {
+    .input_disabled {
+      opacity: 0.6 !important;
+    }
+  }
+}
+
+.rusdn-form-field {
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+.input-area {
+  ::ng-deep {
+    .mat-form-field-flex {
+      height: unset !important;
+    }
+    .mat-form-field-label {
+      transform: translateY(-1em) scale(0.75) !important;
+    }
+  }
+}
+
+mat-icon {
+  position: relative;
+  float: right;
+  height: auto;
+  cursor: pointer;
+  padding-top: 0.2em;
+}
+
+.mat-datepicker-input {
+  width: 85%;
+}
+
+.cst-app-datepicker {
+  ::ng-deep .mat-icon {
+    position: relative;
+    height: auto;
+    cursor: pointer;
+    padding: 0;
+    &.close {
+      font-size: 18px;
+      padding: 0;
+      line-height: normal;
+    }
+  }
+
+  .mat-datepicker-input {
+    width: 85%;
+  }
+
+  ::ng-deep .mat-icon-button {
+    height: 10px;
+    width: 10px;
+  }
+  ::ng-deep .mat-form-field .mat-form-field-suffix {
+    margin-top: 0.5em !important;
+  }
+  ::ng-deep .mat-button-ripple {
+    display: none;
+  }
+
+  mat-icon.date-icon {
+    font-size: 18px;
+  }
+}
+
+.pointer-none {
+  pointer-events: none;
+  color: $light-text;
+}
+.date-picker-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.suffix-wrapper-picker {
+  display: flex;
+}
+.date-error-msg {
+  font-size: 12px !important;
+  padding-left: 12px;
+  margin-top: 0.25em !important;
+  bottom: 0.25rem;
+  position: relative;
+}

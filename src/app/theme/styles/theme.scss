@@ -1,0 +1,102 @@
+// sonarignore:start
+@use '@angular/material' as mat;
+// sonarignore:end
+@import './base/palette.scss';
+@import './base/variable.scss';
+@include mat.core();
+
+$custom-typography: mat.define-typography-config(
+  $font-family: $body-font,
+);
+@include mat.core($custom-typography);
+
+$md-rusdnpink: (
+  50: #ffe0f1,
+  100: #ffb3dd,
+  200: #ff80c6,
+  300: #ff4daf,
+  400: #ff269d,
+  500: #90003b,
+  600: #ff0084,
+  700: #ff0079,
+  800: #ff006f,
+  900: #ff005c,
+  A100: #ffffff,
+  A200: #fff2f6,
+  A400: #ffbfd2,
+  A700: #ffa6c0,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$md-rusdnblue: (
+  50: #e0e0e7,
+  100: #b3b3c3,
+  200: #80809b,
+  300: #4d4d73,
+  400: #262655,
+  500: #90003b,
+  600: #000031,
+  700: #00002a,
+  800: #000023,
+  900: #000016,
+  A100: #5656ff,
+  A200: #2323ff,
+  A400: #0000ef,
+  A700: #0000d5,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$my-typography: mat.define-typography-config(
+  $font-family: $rakuten-font,
+  $display-4: mat.define-typography-level(8.61em, 112px, 300),
+  $display-3: mat.define-typography-level(4.3em, 56px, 300),
+  $display-2: mat.define-typography-level(3.46em, 1.06, 300),
+  $display-1: mat.define-typography-level(2.61em, 1.17, 300),
+  $headline: mat.define-typography-level(1.84em, 1.33, 300),
+  $title: mat.define-typography-level(1.53em, 1.6, 300),
+  $subheading-2: mat.define-typography-level(1.23em, 1.75, 300),
+  $subheading-1: mat.define-typography-level(1.15em, 1.6, 300),
+  $body-2: mat.define-typography-level(1.07em, 1.71, 300),
+  $body-1: mat.define-typography-level(1.07em, 1.42, 300),
+  $caption: mat.define-typography-level(0.92em, 1.66, 300),
+  $button: mat.define-typography-level(1.07em, 2.85, 300),
+  // Line-height must be unit-less fraction of the font-size.
+  $input: mat.define-typography-level(1em, 1.25, 300),
+);
+
+$my-app-primary: mat.define-palette($red, 800);
+$my-app-accent: mat.define-palette($gray, 900, 100);
+$my-app-warn: mat.define-palette(mat.$deep-orange-palette);
+$my-app-theme: mat.define-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include mat.all-component-themes($my-app-theme);

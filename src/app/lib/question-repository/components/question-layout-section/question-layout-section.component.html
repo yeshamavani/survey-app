@@ -1,0 +1,41 @@
+<div class="left-section" fxFlex="217px">
+  <div class="left-hdr border-bottom">'Add Layout Elements'</div>
+  <div class="left-main-content">
+    <div
+      class="drop-list"
+      fxLayoutGap="8px"
+      fxLayout="column"
+      cdkDropList
+      [cdkDropListData]="questionLayoutType"
+    >
+      <div
+        class="q-options"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        *ngFor="let questionType of questionLayoutType"
+        cdkDrag
+        [cdkDragData]="questionType"
+      >
+        <div
+          class="options-lhs"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+        >
+          <mat-icon class="icomoon">
+            <img [src]="questionType?.src" alt="" />
+          </mat-icon>
+          <div class="panel-title">{{ questionType?.displayValue }}</div>
+        </div>
+        <div
+          class="options-rhs"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+        >
+          <mat-icon class="icomoon dot rotate-90 dragHandle"> </mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

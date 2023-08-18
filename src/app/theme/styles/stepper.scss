@@ -1,0 +1,178 @@
+@import './base/variable.scss';
+
+.stepper-container {
+  height: calc(100vh - 118px);
+  padding: 0;
+  position: relative;
+
+  .mat-drawer-container {
+    background-color: transparent;
+    height: 100%;
+    .mat-drawer-end {
+      border-left: none !important;
+      z-index: 11;
+    }
+  }
+}
+
+.mat-stepper-horizontal {
+  background-color: transparent !important;
+  padding: 0;
+  padding-bottom: 0;
+  .mat-horizontal-stepper-header-container {
+    width: 100%;
+    margin: 0 auto;
+
+    .mat-step-header {
+      border-radius: 10px;
+      height: 56px;
+
+      &:hover {
+        background-color: transparent;
+      }
+      &[ng-reflect-state='done'],
+      &[ng-reflect-state='edit'],
+      &[ng-reflect-selected='true'] {
+        .mat-step-label {
+          color: $my-app-primary-800;
+        }
+      }
+      .mat-step-label {
+        color: $my-app-accent-800 !important;
+        font-size: 13px !important;
+        &.mat-step-label-selected {
+          font-weight: 400;
+          &.mat-step-label-active {
+            color: $purple-600 !important;
+          }
+        }
+      }
+    }
+
+    .mat-stepper-horizontal-line {
+      border-top-width: 1px;
+      border-top-color: $my-app-accent-800;
+    }
+
+    .mat-step-icon {
+      background-color: $my-app-primary-800;
+      width: 24px;
+      height: 24px;
+
+      &.mat-step-icon-selected,
+      &.mat-step-icon-state-number,
+      &.mat-step-icon-state-edit {
+        background-color: $purple-600 !important;
+        border-color: transparent !important;
+        .mat-icon {
+          font-size: 14px !important;
+        }
+      }
+      &.mat-step-icon-state-number:not(.mat-step-icon-selected) {
+        background-color: transparent !important;
+        border: 1px solid $my-app-accent-800 !important;
+        .mat-icon {
+          display: none !important;
+        }
+      }
+    }
+  }
+  .mat-horizontal-content-container {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    padding: 0 !important;
+    overflow: visible;
+    width: 100%;
+
+    .stepper-main {
+      height: 100%;
+      overflow: auto;
+      padding: 0 16px;
+      max-height: calc(100vh - 189px);
+      .mat-card {
+        .mat-card-header {
+          width: 100%;
+          padding: 13px 16px;
+          border-bottom: 1px solid $input-border;
+          .mat-card-header-text {
+            margin: 0;
+            .mat-card-title {
+              font-weight: bold;
+              font-size: 18px;
+              line-height: 22px;
+              color: $text-color;
+              margin: 0;
+            }
+          }
+        }
+        .mat-card-content {
+          padding: 16px;
+        }
+      }
+      .template-detail-wrapper {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        ::ng-deep .mat-card {
+          flex: 1;
+        }
+      }
+      .mt-16 {
+        margin-top: 16px;
+      }
+    }
+
+    .mat-horizontal-stepper-content[aria-expanded='true'] {
+      flex: 1;
+    }
+
+    .app-onboarding-basic-input-title {
+      color: #777777;
+      margin-left: 1em;
+    }
+
+    .mat-radio-button ~ .mat-radio-button {
+      margin-left: 1rem;
+    }
+
+    .input-label {
+      margin-left: 16px;
+      color: $text-color;
+      margin-bottom: 5px;
+      display: inline-flex;
+      word-break: break-word;
+    }
+  }
+  .mat-horizontal-stepper-header {
+    pointer-events: none;
+  }
+}
+
+@mixin styleStepLine($index) {
+  .mat-horizontal-stepper-header
+    + .mat-stepper-horizontal-line:nth-child(#{$index}) {
+    border-top-color: $color-primary !important;
+  }
+}
+
+::ng-deep .last-edited-step-1 {
+  @include styleStepLine(2);
+}
+
+::ng-deep .last-edited-step-2 {
+  @include styleStepLine(2);
+  @include styleStepLine(4);
+}
+::ng-deep .last-edited-step-3 {
+  @include styleStepLine(2);
+  @include styleStepLine(4);
+  @include styleStepLine(6);
+}
+::ng-deep .last-edited-step-4 {
+  @include styleStepLine(2);
+  @include styleStepLine(4);
+  @include styleStepLine(6);
+  @include styleStepLine(8);
+}

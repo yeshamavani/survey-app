@@ -1,0 +1,28 @@
+@import './base/variable.scss';
+
+.mat-row {
+  .action-items {
+    visibility: hidden;
+    display: none !important;
+    .mat-icon-button {
+      color: $light-68;
+    }
+    &.row-clicked {
+      visibility: visible !important;
+      display: flex !important;
+    }
+  }
+  &:hover {
+    background-color: $input-border;
+    cursor: pointer;
+    > .mat-column-actions {
+      position: sticky;
+      right: 0;
+      background-color: $input-border;
+      .action-items {
+        visibility: visible;
+        display: flex !important;
+      }
+    }
+  }
+}

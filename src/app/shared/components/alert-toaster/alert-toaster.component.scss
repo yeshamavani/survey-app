@@ -1,0 +1,36 @@
+@import '../../../theme/styles/base/variable.scss';
+
+.content-header-divider {
+    border-color: transparent;
+    width: 1px;
+    height: 16px;
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+    margin: 0 1em;
+    background-color: $border-color-dark
+  }
+  
+  .sc-error{
+    background-color: $alert-error-bg;
+    height: 56px;
+    padding: 0 16px;
+  }
+  
+  .colour-red{
+    color: $alert-error-font
+  }
+  
+  .first-text{
+    margin-left: 16px;
+    font-size: 13px;
+  }
+  
+  .second-text{
+    font-size: 13px;
+  }
+  
+  .edit-purple{
+    cursor: pointer;
+    color: $purple-700;
+  }

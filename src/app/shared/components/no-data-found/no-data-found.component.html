@@ -1,0 +1,48 @@
+<div
+  [class]="containerClass"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  [style.height]="height"
+  [ngClass]="isFilterApplied"
+>
+  <div class="placeholder-img">
+    <img [src]="imageUrl "alt="" />
+  </div>
+  <h1>{{ titleText }}</h1>
+  <div
+    fxLayoutAlign="center center"
+    fxLayout="column"
+    class="add-contracts pb-16"
+  >
+    <p
+      *ngIf="showSubtitleText"
+      [innerHTML]="subtitleText"
+      [ngClass]="lineBreakInSubtitleText ? 'line-break-subtitle' : ''"
+    ></p>
+    <div
+      class="add-btn"
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="1rem"
+    >
+      <button
+        *ngIf="addNewBtn"
+        mat-raised-button
+        color="accent"
+        (click)="addNew()"
+      >
+        {{ addButtonText }}
+      </button>
+
+      <button
+        *ngIf="addSecondButton"
+        mat-button
+        class="color-tertiary"
+        color="accent"
+        (click)="secondButtonClickHandler()"
+      >
+        {{ secondButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div
+  fxLayout="row"
+  class="toastr-container"
+  [ngClass]="{
+    'success-toast': toastType === ToastType.Success,
+    'info-toast': toastType === ToastType.Info,
+    'warning-toast': toastType === ToastType.Warning,
+    'error-toast': toastType === ToastType.Error
+  }"
+>
+  <span fxLayout="row" class="toastr-msg-container">
+    <span class="">
+      <mat-icon
+        class="icomoon toastr-icon Chevron-Right"
+        [ngClass]="{
+          check: toastType === ToastType.Success,
+          'Info-Outline':
+            toastType === ToastType.Info || toastType === ToastType.Warning,
+          'Warning-Outlined': toastType === ToastType.Error
+        }"
+      ></mat-icon>
+    </span>
+    <span *ngIf="options.enableHtml; else noHtml" [innerHTML]="message"></span>
+    <ng-template #noHtml>
+      <span class="msg">{{ message }}</span>
+    </ng-template>
+  </span>
+  <span class="close-btn">
+    <mat-icon (click)="close()" class="icomoon close toastr-icon"></mat-icon>
+  </span>
+</div>

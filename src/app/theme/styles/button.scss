@@ -1,0 +1,213 @@
+@import './base/variable.scss';
+
+.rusdn-input-button {
+  .mat-icon-button {
+    color: $light-68;
+    &.cdk-keyboard-focused {
+      color: $color-primary !important;
+      .icon-svg {
+        filter: invert(8%) sepia(76%) saturate(5961%) hue-rotate(323deg)
+          brightness(56%) contrast(117%);
+      }
+    }
+    &.active,
+    &:active,
+    &[aria-expanded='true'] {
+      color: $purple-600 !important;
+      .icon-svg {
+        filter: invert(8%) sepia(76%) saturate(5961%) hue-rotate(323deg)
+          brightness(56%) contrast(117%);
+      }
+    }
+  }
+  .btn-clr-hover {
+    border-color: $input-border;
+    border-radius: 0.308em;
+    font-size: 12px;
+    height: 36px;
+    padding: 0 5px;
+    min-width: 36px;
+
+    &:hover {
+      background-color: $my-app-accent-700 !important;
+      border-color: $my-app-accent-700 !important;
+      color: $color-white !important;
+      .icon-svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+    &.cdk-keyboard-focused {
+      background-color: $my-app-accent-900 !important;
+      border-color: $purple-600 !important;
+      color: $color-white !important;
+      .icon-svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+    &.active,
+    &:active {
+      background-color: $purple-600;
+      border-color: $purple-600 !important;
+      color: $color-white !important;
+      .icon-svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    &[aria-expanded='true'] {
+      background-color: $my-app-primary-800 !important;
+      border-color: $my-app-primary-800 !important;
+      color: $color-white !important;
+    }
+    &.mat-stroked-button {
+      color: $light-68;
+    }
+    .mat-button-wrapper {
+      height: 100%;
+      .btn-svg-icon {
+        max-width: 20px;
+        margin: 0;
+      }
+    }
+    &.cst-accent-color {
+      &:hover {
+        border-color: $color-primary !important;
+        background-color: $color-primary;
+        color: $color-white;
+      }
+    }
+  }
+}
+
+button {
+  &.mat-button-disabled {
+    background-color: transparent;
+    color: $my-app-accent-400;
+    border-color: $btn-disable-border;
+    &:hover.mat-icon-button:hover,
+    .mat-icon-button:hover {
+      .mat-icon {
+        color: $btn-disable-text !important;
+      }
+    }
+  }
+
+  &.mat-stroked-button {
+    line-height: 32px !important;
+    border-color: $color-black;
+    font-weight: 600;
+    &.h-36 {
+      height: 36px;
+    }
+    height: 36px;
+    &.mat-primary {
+      border-color: $color-black !important;
+      color: $color-black;
+      &:not([disabled]) {
+        &:hover {
+          background-color: $my-app-accent-700;
+          color: $color-white;
+        }
+        &.cdk-keyboard-focused {
+          background-color: $color-black !important;
+          border: 2px solid $purple-300;
+          color: $color-white;
+        }
+        &:active {
+          background-color: $purple-600;
+          border-color: $purple-600 !important;
+          color: $color-white;
+        }
+      }
+      &[disabled] {
+        background-color: transparent;
+        color: $my-app-accent-400;
+        border-color: $btn-disable-border;
+      }
+    }
+    &.mat-accent {
+      border-color: $my-app-accent-900 !important;
+      color: $my-app-accent-900;
+      &:not([disabled]) {
+        &:hover {
+          background-color: transparent;
+          border-color: $my-app-accent-700 !important;
+          color: $my-app-accent-700 !important;
+        }
+        &.cdk-keyboard-focused {
+          background-color: $my-app-accent-900;
+          border: 2px solid $purple-300 !important;
+          color: $color-white;
+        }
+        &:active {
+          color: $color-white !important;
+          background-color: $purple-600;
+          border-color: $purple-600 !important;
+        }
+      }
+      &[disabled] {
+        background-color: transparent !important;
+        color: $my-app-accent-400 !important;
+        border-color: $my-app-accent-100 !important;
+      }
+    }
+  }
+
+  &.mat-raised-button {
+    height: 36px;
+    line-height: 32px !important;
+    font-weight: 600;
+    &.mat-primary {
+      background-color: $color-black;
+      border: 2px solid $color-black !important;
+      color: white;
+      &:not([disabled]) {
+        &:hover {
+          background-color: $color-primary;
+          color: white;
+        }
+        &.cdk-keyboard-focused {
+          background-color: $color-black;
+          border: 2px solid $purple-300 !important;
+          color: white;
+        }
+        &:active {
+          background-color: $purple-600;
+          border-color: $purple-600 !important;
+          color: white;
+        }
+      }
+      &[disabled] {
+        background-color: $my-app-accent-100;
+        color: $my-app-accent-400;
+        border-color: $my-app-accent-100;
+      }
+    }
+    &.mat-accent {
+      border-color: $my-app-accent-900 !important;
+      color: $color-white;
+      &:not([disabled]) {
+        &:hover {
+          background-color: $my-app-accent-700 !important;
+          border-color: $my-app-accent-700 !important;
+          color: $color-white;
+        }
+        &.cdk-keyboard-focused {
+          background-color: $color-black;
+          border-color: 1px solid $purple-300 !important;
+          color: $color-white;
+        }
+        &:active {
+          color: $color-white;
+          background-color: $purple-600;
+          border-color: $purple-600 !important;
+        }
+      }
+      &[disabled] {
+        background-color: $my-app-accent-100 !important;
+        color: $my-app-accent-400 !important;
+        border-color: $my-app-accent-100 !important;
+      }
+    }
+  }
+}

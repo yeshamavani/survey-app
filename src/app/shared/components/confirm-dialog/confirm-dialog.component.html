@@ -1,0 +1,89 @@
+<div class="delete-dialog">
+  <div fxLayout="column" mat-dialog-content>
+    <div class="dialog-icon info-graph-icons">
+      <img [src]="imagePath" [alt]="data.confirmationIcon" />
+    </div>
+    <mat-label
+      id="dialog-msg"
+      class="description-label"
+      [innerHTML]="data.dialogMsg"
+    ></mat-label>
+    <mat-label *ngIf="data.dialogNote" class="dialog-note">
+      {{ data.dialogNote }} ?</mat-label
+    >
+    <br />
+    <mat-label
+      *ngIf="data.footerNote"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      class="warning-msg"
+    >
+      <mat-icon class="icomoon Warning-Outlined"></mat-icon
+      ><span class="msg">{{ data.footerNote }}</span>
+    </mat-label>
+    <div class="w-100" *ngIf="data?.showInputField">
+      <input-text-box
+        [type]="data.inputType ?? 'text'"
+        [textAreaRow]="4"
+        [noPadding]="true"
+        [maxlength]="data.fieldLength"
+        [required]="data.required ?? false"
+        [label]="data.labelName ?? ''"
+        [validateArray]="data.customErrorMessage"
+        [text]="modalForm.get('value')?.value"
+        [control]="modalForm.get('value')"
+        [max]="data.max"
+        [showCharCount]="data.showCharCount ?? false"
+      ></input-text-box>
+      <mat-error
+        class="editor-error"
+        *ngIf="modalForm.get('value')?.invalid && modalForm.get('value')?.dirty"
+      >
+        <span *ngIf="modalForm.get('value')?.errors?.['maxlength']">{{
+          fieldLengthErrorMessage
+        }}</span>
+      </mat-error>
+    </div>
+    <mat-label
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      *ngIf="data.warningMsg"
+      class="warning-msg"
+    >
+      <mat-icon class="icomoon Warning-Outlined"></mat-icon
+      ><span class="msg">{{ data.warningMsg }}</span>
+    </mat-label>
+    <div *ngIf="data.extraHtml" [innerHTML]="data.extraHtml"></div>
+    <div class="dialog-checkbox" *ngIf="data.isCheckboxRequired">
+      <mat-checkbox color="primary" [(ngModel)]="isChecked">
+        <span
+          class="field-text ellipsis"
+          matTooltipPosition="above"
+          matTooltipClass="tooltip-above word-wrap"
+        >
+          {{ data.checkBoxLabel }}
+        </span>
+      </mat-checkbox>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div fxFlex="100" fxLayoutAlign="center center" class="dialog-actions">
+      <input-button
+        type="stroked"
+        color="accent"
+        [value]="data.noLabel ? data.noLabel : 'LBL_NO'"
+        (click)="onNo()"
+      >
+      </input-button>
+      <span [style.width]="'16px'"></span>
+      <input-button
+        type="raised"
+        color="accent"
+        [value]="data.yesLabel ? data.yesLabel : 'LBL_YES'"
+        [disabled]="data.showInputField && !modalForm.valid"
+        (click)="onYes()"
+      >
+      </input-button>
+    </div>
+  </div>
+</div>

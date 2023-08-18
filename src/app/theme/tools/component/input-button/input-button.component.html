@@ -1,0 +1,266 @@
+<div
+  class="rusdn-input-button"
+  [ngSwitch]="type"
+  [class.margin]="margin"
+  (click)="click($event)"
+>
+  <ng-container *ngSwitchCase="'basic'">
+    <button
+      mat-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.border]="border"
+      [style.border-color]="borderColor"
+      [style.height]="height"
+      [style.font-size]="textSize"
+      [style.color]="color"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [attr.automationId]="automationId"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span class="margin">{{ value }}</span>
+      <mat-icon
+        *ngIf="matIconRight"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconRight"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'raised'">
+    <button
+      mat-raised-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [style.font-size]="textSize"
+      [style.border-color]="borderColor"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span class="margin">{{ value }}</span>
+      <mat-icon
+        *ngIf="matIconRight"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconRight"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'stroked'">
+    <button
+      mat-stroked-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [style.border-color]="borderColor"
+      [style.font-size]="textSize"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [style.font-size]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span class="margin">{{ value }}</span>
+      <mat-icon
+        *ngIf="matIconRight"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [style.font-size]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconRight"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'stroked-progress'">
+    <button
+      mat-stroked-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [style.font-size]="textSize"
+      [style.border-color]="borderColor"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span>{{ value }}</span>
+      <mat-icon
+        *ngIf="matIconRight"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconRight"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'flat'">
+    <button
+      mat-flat-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.border-color]="borderColor"
+      [style.font-size]="textSize"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span class="margin">{{ value }}</span>
+      <mat-icon
+        *ngIf="matIconRight"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconRight"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'icon'">
+    <button
+      mat-icon-button
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [style.border-color]="borderColor"
+      [style.border]="border"
+      [style.border-radius]="borderRadius"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [fontSet]="fontSet"
+        [style.fontSize]="iconSize"
+        [fontIcon]="matIconLeft"
+      >
+      </mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'icon-stroked'">
+    <button
+      mat-icon-button
+      class="mat-icon-stroked"
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.border-color]="borderColor"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'icon-stroked-circle'">
+    <button
+      mat-icon-button
+      class="mat-icon-stroked-circle"
+      [color]="color"
+      [disabled]="disabled"
+      [style.background-color]="bgColor"
+      [style.border-color]="borderColor"
+      [style.width]="width"
+      [style.minWidth]="width"
+      [style.height]="height"
+      [style.color]="color"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      [ngClass]="buttonClass"
+    >
+      <mat-icon
+        *ngIf="matIconLeft"
+        [style.color]="iconColor"
+        [style.fontSize]="iconSize"
+        [fontSet]="fontSet"
+        [fontIcon]="matIconLeft"
+      ></mat-icon>
+      <span *ngIf="badgeCount > 0" [matBadge]="badgeCount"></span>
+    </button>
+  </ng-container>
+</div>
